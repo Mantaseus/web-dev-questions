@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <title>Misc Tasks</title>
+    <link rel="icon" href="./favicon.ico" type="image/x-icon">
+
+    <style>
+      body {
+        width: 700px;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      }
+      .section-title {
+        padding: 4px;
+        font-weight: bold;
+        display: inline-block;
+        color: white;
+        background-color: black;
+      }
+      .question-list {
+        counter-reset: question-num;
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+      .question-list > li {
+        counter-increment: question-num;
+        margin-top: 2em;
+        padding: 1em;
+      }
+      .question-list > li::before {
+        content: "q" counter(question-num);
+        font-weight: bold;
+        display: inline-block;
+        padding: 4px;
+        color: white;
+        background-color: black;
+      }
+      .color-anim-2 {
+        animation: color-anim-2 5s ease infinite;
+        box-sizing: border-box;
+      }
+      @keyframes color-anim-2 {
+        0%    { background-color: #EF3E36; border: 25px solid #FAD8D6; }
+
+        19%   { background-color: #EF3E36; border: 0px solid #FAD8D6; animation-timing-function: step-end; }
+        20%   { background-color: #17BEBB; border: 25px solid #EF3E36; animation-timing-function: ease;}
+
+        39%   { background-color: #17BEBB; border: 0px solid #EF3E36; animation-timing-function: step-end;}
+        40%   { background-color: #2E282A; border: 25px solid #17BEBB; animation-timing-function: ease;}
+
+        59%   { background-color: #2E282A; border: 0px solid #17BEBB; animation-timing-function: step-end;}
+        60%   { background-color: #EDB88B; border: 25px solid #2E282A; animation-timing-function: ease;}
+
+        79%   { background-color: #EDB88B; border: 0px solid #2E282A; animation-timing-function: step-end;}
+        80%   { background-color: #FAD8D6; border: 25px solid #EDB88B; animation-timing-function: ease;}
+
+        99%   { background-color: #FAD8D6; border: 0px solid #EDB88B; animation-timing-function: step-end;}
+        100%  { background-color: #EF3E36; border: 25px solid #FAD8D6; animation-timing-function: ease;}
+      }
+    </style>
+  </head>
+
+  <body>
+    <ol class="question-list">
+      <li>
+        <div class="section-title">CSS Animations - Colorful loader 2</div>
+        <p>
+          Task: Make a 50px by 50px circle that uses <code>box-sizing: border-box</code> (because we will be using borders ;)). Use the same colors as in the previous question
+          and make it look as if the next color is "growing" out from the center and covering the circle.
+        </p>
+        <div class="filled-circle color-anim-2"></div>
+      </li>
+    </ol>
+  </body>
+</html>

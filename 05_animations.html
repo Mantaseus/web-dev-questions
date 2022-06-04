@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <title>Animations</title>
+    <link rel="icon" href="./favicon.ico" type="image/x-icon">
+
+    <style>
+      body {
+        width: 700px;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      }
+      .section-title {
+        padding: 4px;
+        font-weight: bold;
+        display: inline-block;
+        color: white;
+        background-color: black;
+      }
+      .question-list {
+        counter-reset: question-num 30;
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+      .question-list > li {
+        counter-increment: question-num;
+        margin-top: 2em;
+        padding: 1em;
+      }
+      .question-list > li::before {
+        content: "q" counter(question-num);
+        font-weight: bold;
+        display: inline-block;
+        padding: 4px;
+        color: white;
+        background-color: black;
+      }
+
+      .circle {
+        width: 50px;
+        height: 50px;
+        border: 10px solid #ddd;
+        border-radius: 100px;
+        box-sizing: border-box;
+      }
+
+      .with-bar {
+        border-right-color: #000;
+      }
+
+      .with-rotation {
+        transform: rotate(45deg);
+      }
+
+      .with-spin-anim {
+        animation: spin-cw 2s linear infinite;
+      }
+      @keyframes spin-cw {
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+
+      .filled-circle {
+        width: 50px;
+        height: 50px;
+        background-color: #ddd;
+        border-radius: 100px;
+      }
+
+      .color-anim {
+        animation: color-anim 5s ease infinite;
+      }
+      @keyframes color-anim {
+        0%    { background-color: #EF3E36; transform: scale(1.1); }
+        10%   { transform: scale(1); }
+        20%   { background-color: #17BEBB; transform: scale(1.1);  }
+        30%   { transform: scale(1); }
+        40%   { background-color: #2E282A; transform: scale(1.1);  }
+        50%   { transform: scale(1); }
+        60%   { background-color: #EDB88B; transform: scale(1.1);  }
+        70%   { transform: scale(1); }
+        80%   { background-color: #FAD8D6; transform: scale(1.1);  }
+        90%   { transform: scale(1); }
+        100%  { background-color: #EF3E36; transform: scale(1.1);  }
+      }
+
+      .jiggle:active {
+        animation: jiggle 1s ease;
+      }
+      @keyframes jiggle {
+        0% { transform: scale(1) }
+        30% { transform: scale(1.25, 0.75) }
+        40% { transform: scale(0.75, 1.25) }
+        50% { transform: scale(1.15, 0.85) }
+        65% { transform: scale(0.95, 1.05) }
+        75% { transform: scale(1.05, 0.95) }
+        100% { transform: scale(1) }
+      }
+    </style>
+  </head>
+
+  <body>
+    <ol class="question-list">
+      <li>
+        <div class="section-title">CSS Animations</div>
+        <p>
+          Task: Make a circle that looks like this using just a single <code>div</code>. The outer diameter of the circle must be 50px.
+          The thickness of the line must be 10px. The color of the line is <code>#ddd</code>.
+        </p>
+        <div class="circle"></div>
+        <p>
+          Hint: Use <code>box-sizing</code> property to easily specify the outer diameter to 50px without having to do any math
+        </p>
+      </li>
+
+      <li>
+        <div class="section-title">CSS Animations</div>
+        <p>
+          Task: Alter the circle from the previous question to look like this. The black bar has a color of <code>#000</code>.
+        </p>
+        <div class="circle with-bar"></div>
+      </li>
+
+      <li>
+        <div class="section-title">CSS Animations - Rotation transformation</div>
+        <p>
+          Task: Use CSS only to rotate the circle from the previous question to look like this. Rotate the circle clockwise by 45 degress
+        </p>
+        <div class="circle with-bar with-rotation"></div>
+      </li>
+
+      <li>
+        <div class="section-title">CSS Animations - Spin animation</div>
+        <p>
+          Task: Alter the circle from the previous question and use CSS animations to animate it to rotate a full revolution clockwise every 2 seconds with linear pacing. The animation runs infinitely
+        </p>
+        <div class="circle with-bar with-spin-anim"></div>
+      </li>
+
+      <li>
+        <div class="section-title">CSS Animations - Colorful loader</div>
+        <p>
+          Task: Make a 50px by 50px circle that has an infinite animation like this that repeats every 5 seconds and uses the <code>ease</code> timing function.
+          The color used are <code>#EF3E36</code>, <code>#17BEBB</code>, <code>#2E282A</code>, <code>#EDB88B</code>, <code>#FAD8D6</code>, and <code>#EF3E36</code>.
+          Distribute the animation keyframes equally such that the animation loops smoothly.
+          The circle scales up by 1.1 (in both X and Y axis) at the same time that the colors change in the animation and goes to a scale of 1 (in both X and Y axis) in
+          the middle of the color transition
+        </p>
+        <div class="filled-circle color-anim"></div>
+      </li>
+
+      <li>
+        <div class="section-title">CSS Animations - Jiggle on click</div>
+        <p>
+          Task: Make a 50px by 50px circle with background color of <code>#ddd</code>. Make it animate roughly as shown below while the user clicks on the circle (i.e use <code>:active</code>).
+          The animation is 1 second long. Use <code>ease</code> transition pacing. Here are the keyframes
+        </p>
+        <ul style="margin-bottom: 16px;">
+          <li>0% - scale X=1, Y=1</li>
+          <li>30% - scale X=1.25, Y=0.75</li>
+          <li>40% - scale X=0.75, Y=1.25</li>
+          <li>50% - scale X=1.15, Y=0.85</li>
+          <li>65% - scale X=0.95, Y=1.05</li>
+          <li>75% - scale X=1.05, Y=0.95</li>
+          <li>100% - scale X=1, Y=1</li>
+        </ul>
+        <div class="filled-circle jiggle"></div>
+        <p>Try playing around with the time of the animation and notice how it can make it seem as if the circle is very springy or jelly-like</p>
+        <p>
+          Notice the scaling values. The X and Y values always add up to 2. When making animations like this it is important to remember the "Law of conservation of Mass". If the mass is not
+          conserved then the animation can look a bit unnatural (but sometimes you might want that)
+        </p>
+      </li>
+    </ol>
+  </body>
+</html>

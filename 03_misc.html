@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <title>Misc Tasks</title>
+    <link rel="icon" href="./favicon.ico" type="image/x-icon">
+
+    <style>
+      body {
+        width: 700px;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      }
+      .section-title {
+        padding: 4px;
+        font-weight: bold;
+        display: inline-block;
+        color: white;
+        background-color: black;
+      }
+      .question-list {
+        counter-reset: question-num 21;
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+      .question-list > li {
+        counter-increment: question-num;
+        margin-top: 2em;
+        padding: 1em;
+      }
+      .question-list > li::before {
+        content: "q" counter(question-num);
+        font-weight: bold;
+        display: inline-block;
+        padding: 4px;
+        color: white;
+        background-color: black;
+      }
+
+      .container-1 {
+        padding-top: 5px;
+        padding-right: 10px;
+        padding-bottom: 15px;
+        padding-left: 20px;
+      }
+      .container-2 {
+        padding: 5px 10px 15px 20px;
+      }
+      .child-1 {
+        margin: 5px 10px 15px 20px;
+      }
+
+      .my-list-1 {
+        list-style-type: square;
+      }
+      .my-list-1 li::marker {
+        color: red;
+      }
+
+      .my-list-2 {
+        list-style: none;
+        counter-reset: item;
+      }
+      .my-list-2 li {
+        counter-increment: item;
+        margin-bottom: 2px;
+        display: flex;
+      }
+      .my-list-2 li::before {
+        content: counter(item);
+        padding: 4px 8px;
+        margin-right: 8px;
+        background-color: black;
+        display: inline-block;
+        color: white;
+      }
+
+      .my-list-3 {
+        list-style: none;
+        counter-reset: item;
+      }
+      .my-list-3 li {
+        counter-increment: item;
+        margin-bottom: 16px;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .my-list-3 li::before {
+        content: counter(item);
+        padding: 4px 8px;
+        margin-bottom: 4px;
+        background-color: black;
+        display: inline-block;
+        color: white;
+      }
+
+      .my-table-1 {
+        border-radius: 4px;
+        border-collapse: collapse;
+      }
+      .my-table-1 td,
+      .my-table-1 th {
+        border: 1px solid #ccc;
+        padding: 4px;
+      }
+      .my-table-1 td {
+        text-align: start;
+        vertical-align: top;
+      }
+
+      .my-table-2 .key {
+        font-weight: bold;
+        padding-right: 16px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <ol class="question-list">
+      <li>
+        <div class="section-title">Padding: With separate CSS property for each direction</div>
+        <p>
+          Task: Define a <code>div</code> withing a <code>div</code> as shown below
+        </p>
+        <pre>
+          &lt;div class=&quot;container-1&quot; style=&quot;background-color: red; width: 100px; height: 100px;&quot;&gt;
+            &lt;div style=&quot;background-color: blue; width: 100%; height: 100%;&quot;&gt;&lt;/div&gt;
+          &lt;/div&gt;
+        </pre>
+        <div class="container-1" style="background-color: red; width: 100px; height: 100px;">
+          <div style="background-color: blue; width: 100%; height: 100%;"></div>
+        </div>
+        <p>
+          Define CSS for the <code>container-1</code> class using the
+          <code>padding-top</code>,
+          <code>padding-right</code>,
+          <code>padding-bottom</code>, and
+          <code>padding-left</code>
+          CSS properties <b>only</b> such that the
+          top space is 5px,
+          right space is 10px,
+          bottom space is 15px, and
+          left space is 20px
+        </p>
+      </li>
+
+      <li>
+        <div class="section-title">Padding: With a single CSS property</div>
+        <p>
+          Task: Define a <code>div</code> withing a <code>div</code> as shown below
+        </p>
+        <pre>
+          &lt;div class=&quot;container-2&quot; style=&quot;background-color: red; width: 100px; height: 100px;&quot;&gt;
+            &lt;div style=&quot;background-color: blue; width: 100%; height: 100%;&quot;&gt;&lt;/div&gt;
+          &lt;/div&gt;
+        </pre>
+        <div class="container-2" style="background-color: red; width: 100px; height: 100px;">
+          <div style="background-color: blue; width: 100%; height: 100%;"></div>
+        </div>
+        <p>
+          Define CSS for the <code>container-2</code> class using just the <code>padding</code> CSS property
+          <b>only</b> such that the
+          top space is 5px,
+          right space is 10px,
+          bottom space is 15px, and
+          left space is 20px.
+          The format would look something like this (figure out what to put in the blanks)
+        </p>
+        <pre>
+          .container-2 {
+            padding: __ __ __ __;
+          }
+        </pre>
+        <p>Note: This is a convenient format that allows us to define the padding for multiple directions in a single line</p>
+      </li>
+
+      <li>
+        <div class="section-title">Unordered list</div>
+        <p>
+          Task: Make an unordered list that looks like the one shown below. The container can be defined like This
+        </p>
+        <pre>
+          &lt;div style=&quot;border: 1px solid black; padding: 8px;&quot;&gt;
+            &lt;!-- Put your stuff here --&gt;
+          &lt;/div&gt;
+        </pre>
+        <div style="border: 1px solid black; padding: 8px;">
+          <ul>
+            <li>Scissors</li>
+            <li>Car socket to normal electrical socket converter</li>
+            <li>More maggie</li>
+            <li>More bhel puri</li>
+          </ul>
+        </div>
+      </li>
+
+      <li>
+        <div class="section-title">Unordered list: styling</div>
+        <p>
+          Task: Take the same unordered list from above and style it so that the bullet points are red boxes as shown below
+        </p>
+        <div style="border: 1px solid black; padding: 8px;">
+          <ul class="my-list-1">
+            <li>Scissors</li>
+            <li>Car socket to normal electrical socket converter</li>
+            <li>More maggie</li>
+            <li>More bhel puri</li>
+          </ul>
+        </div>
+      </li>
+
+      <li>
+        <div class="section-title">Ordered list</div>
+        <p>
+          Task: Make an ordered list as shown below using the code below. The bottom margin for each list item is 2px. The paddng for
+          each bullet point box is <code>4px 8px</code>. The right margin on each bullet point is 8px.
+        </p>
+        <pre>
+          &lt;div style=&quot;border: 1px solid black; padding: 8px;&quot;&gt;
+            &lt;ol class=&quot;my-list-2&quot;&gt;
+              &lt;li&gt;Learn basics of HTML&lt;/li&gt;
+              &lt;li&gt;Learn basics of CSS&lt;/li&gt;
+              &lt;li&gt;Make webpages using HTML and CSS&lt;/li&gt;
+              &lt;li&gt;Learn Javascript and add interactivity &lt;br/&gt; to the webpages&lt;/li&gt;
+              &lt;li&gt;Learn React&lt;/li&gt;
+            &lt;/ol&gt;
+          &lt;/div&gt;
+        </pre>
+        <div style="border: 1px solid black; padding: 8px;">
+          <ol class="my-list-2">
+            <li>Learn basics of HTML</li>
+            <li>Learn basics of CSS</li>
+            <li>Make webpages using HTML and CSS</li>
+            <li>Learn Javascript and add interactivity <br/> to the webpages</li>
+            <li>Learn React</li>
+          </ol>
+        </div>
+        <p>Hints: You will need to use the <code>::before</code> technique for this. Also consider using flexboxes to arrange the bullet point numbers and the list text</p>
+      </li>
+
+      <li>
+        <div class="section-title">Ordered list</div>
+        <p>
+          Task: Make an ordered list as shown below using the code below. The bottom margin for each list item is 16px. The paddng for
+          each bullet point box is <code>4px 8px</code>. The bottom margin on each bullet point is 4px.
+        </p>
+        <pre>
+          &lt;div style=&quot;border: 1px solid black; padding: 8px;&quot;&gt;
+            &lt;ol class=&quot;my-list-3&quot;&gt;
+              &lt;li&gt;Learn basics of HTML&lt;/li&gt;
+              &lt;li&gt;Learn basics of CSS&lt;/li&gt;
+              &lt;li&gt;Make webpages using HTML and CSS&lt;/li&gt;
+              &lt;li&gt;Learn Javascript and add interactivity &lt;br/&gt; to the webpages&lt;/li&gt;
+              &lt;li&gt;Learn React&lt;/li&gt;
+            &lt;/ol&gt;
+          &lt;/div&gt;
+        </pre>
+        <div style="border: 1px solid black; padding: 8px;">
+          <ol class="my-list-3">
+            <li>Learn basics of HTML</li>
+            <li>Learn basics of CSS</li>
+            <li>Make webpages using HTML and CSS</li>
+            <li>Learn Javascript and add interactivity <br/> to the webpages</li>
+            <li>Learn React</li>
+          </ol>
+        </div>
+        <p>Hints: You should only need to make a few changes to the flexbox from the previous question to get this working</p>
+      </li>
+
+      <li>
+        <div class="section-title">Table</div>
+        <p>
+          Task: Make a table with the following style and content. The padding in each cell is 4px.
+        </p>
+        <table class="my-table-1">
+          <thead>
+            <th>Game</th>
+            <th>Release date</th>
+            <th>Comments</th>
+          </thead>
+          <tbody class="my-table-1">
+            <tr>
+              <td>The Last of Us</td>
+              <td>2013.6.14</td>
+              <td>This is a movie. But we somehow get to play it. It is a game that needs to be experienced to be believed</td>
+            </tr>
+            <tr>
+              <td>The Last of Us Part II</td>
+              <td>2020.6.19</td>
+              <td>Takes the caracters we know and love into dark, intense and unforgettable directions that leaves you thinking about the game for years to come. The atmosphere immerses you like no other game I have ever played and makes you almost believe you are right there with Ellie as she travels through a rainy andx zombie infestested Seattle</td>
+            </tr>
+            <tr>
+              <td>Horizon Zero Dawn</td>
+              <td>2017.2.28</td>
+              <td>Introduces players to an imaginative world filled with robotic animals while humans live in relatively primitive tribes. The game immerses you into this open world and makes you eager to learn more about why the world is the way that it is</td>
+            </tr>
+            <tr>
+              <td>Horizon II Forbidden West</td>
+              <td>2022.2.18</td>
+              <td>Presents a great story that expertly builds on the world and mythology created in the first game. The world is beautiful and encourages players to explore its every nook and cranny</td>
+            </tr>
+            <tr>
+              <td>Dishonored</td>
+              <td>2012.10.9</td>
+              <td>A stealth game with expertly crafted levels that offer chances for stealth and even allow players to finish the game without killing anyone</td>
+            </tr>
+          </tbody>
+        </table>
+        <p>Note: Don't bother writing out all the comments</p>
+      </li>
+
+      <li>
+        <div class="section-title">Table</div>
+        <p>
+          Task: Use a table to make the following. The min space between the two columns must be 16px
+        </p>
+        <div style="border: 1px solid black; padding: 8px;">
+          <table class="my-table-2">
+            <tbody>
+              <tr>
+                <td class="key"><b>First Name</b></td>
+                <td>Satnam Singh</td>
+              </tr>
+              <tr>
+                <td class="key"><b>Last Name</b></td>
+                <td>Brar</td>
+              </tr>
+              <tr>
+                <td class="key"><b>Marital status</b></td>
+                <td>Married</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </li>
+    </ol>
+  </body>
+</html>
+

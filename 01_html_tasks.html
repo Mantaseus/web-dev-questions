@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <title>HTML Tasks</title>
+    <link rel="icon" href="./favicon.ico" type="image/x-icon">
+
+    <style>
+      body {
+        width: 700px;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      }
+      .section-title {
+        padding: 4px;
+        font-weight: bold;
+        display: inline-block;
+        color: white;
+        background-color: black;
+      }
+      .question-list {
+        counter-reset: question-num;
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+      .question-list > li {
+        counter-increment: question-num;
+        margin-top: 2em;
+        padding: 1em;
+      }
+      .question-list > li::before {
+        content: "q" counter(question-num);
+        font-weight: bold;
+        display: inline-block;
+        padding: 4px;
+        color: white;
+        background-color: black;
+      }
+
+      .changer-1 {
+        width: 100px;
+        height: 50px;
+        background-color: red;
+        color: white;
+      }
+      .changer-1-on-hover,
+      .changer-1:hover {
+        background-color: green;
+      }
+      .changer-1-on-active,
+      .changer-1:active {
+        background-color: blue;
+      }
+
+      .fancy-button {
+        width: 150px;
+        padding: 8px;
+        background-color: #ddd;
+        border-bottom: 10px solid #888;
+      }
+      .fancy-button-on-hover,
+      .fancy-button:hover {
+        border-top: 3px solid white;
+        border-bottom: 7px solid #888;
+      }
+      .fancy-button-on-active,
+      .fancy-button:active {
+        border-top: 7px solid white;
+        border-bottom: 3px solid #888;
+      }
+
+      .song-title {
+        font-weight: bold;
+        margin-bottom: 4px;
+      }
+      .song-artist {
+        font-style: italic;
+        color: gray;
+      }
+    </style>
+  </head>
+
+  <body>
+    <ol class="question-list">
+      <li>
+        <div class="section-title">Red square</div>
+        <p>Task: Make a 100px red square using just a div and simple CSS. Fill it with red</p>
+        <div style="background-color: red; width: 100px; height: 100px;"></div>
+      </li>
+
+      <li>
+        <div class="section-title">Green square with rounded corners</div>
+        <p>Task: Make a 100px green square using just a div and simple CSS. The corners of the square must be rounded with a radius of 20px</p>
+        <div style="background-color: green; width: 100px; height: 100px; border-radius: 20px"></div>
+      </li>
+
+      <li>
+        <div class="section-title">Blue circle</div>
+        <p>Task: Make a blue circle 100px in diameter using just a div and simple CSS</p>
+        <div style="background-color: blue; width: 100px; height: 100px; border-radius: 100%"></div>
+      </li>
+
+      <li>
+        <div class="section-title">Pink pill</div>
+        <p>Task: Make a pink pill that is 50px in height and 200px in width.</p>
+        <div style="background-color: pink; width: 200px; height: 50px; border-radius: 100px"></div>
+      </li>
+
+      <li>
+        <div class="section-title">Red and white pill</div>
+        <p>Task: Make a pill (width: 200px, height: 50px) with the left side red and the right side white. It must have a 2px black border and the two halves should be separated by a black 2px black border as well. You can use 2 divs for this</p>
+        <div style="width: 200px; height: 50px; border-radius: 100px; border: 2px solid black; overflow: hidden">
+          <div style="width: 50%; height: 100%; background-color: red; border-right: 2px solid black"></div>
+        </div>
+      </li>
+
+      <li>
+        <div class="section-title">Flex box: fill space in row</div>
+        <p>Task: Use CSS flexbox to arrange 3 divs as shown below. The padding around the boxes is 10px. The gap between the boxes is 10px. The borders are 1px solid black.</p>
+        <div style="display: flex; padding: 10px; border: 1px solid black; gap: 10px">
+          <div style="border: 1px solid black;">Div 1 - only take space needed</div>
+          <div style="border: 1px solid black; flex: 1;">Div 2 - Fill everything that remains</div>
+          <div style="border: 1px solid black; width: 100px">Div 3 - Takes up 100px</div>
+        </div>
+      </li>
+
+      <li>
+        <div class="section-title">Flex box: fill space in column</div>
+        <p>Task: Use CSS flexbox to arrange 3 divs as shown below. The container has a height of 500px; The padding around the boxes is 10px. The gap between the boxes is 10px. The borders are 1px solid black.</p>
+        <div style="display: flex; flex-direction: column; padding: 10px; border: 1px solid black; gap: 10px; height: 500px">
+          <div style="border: 1px solid black;">Div 1 - only take space needed</div>
+          <div style="border: 1px solid black; flex: 1;">Div 2 - Fill everything that remains</div>
+          <div style="border: 1px solid black; height: 50px">Div 3 - Takes up 50px</div>
+        </div>
+      </li>
+
+      <li>
+        <div class="section-title">Flex box: wrapping</div>
+        <p>Task: Use CSS flexbox to arrange 5 divs as shown below. The container width is 350px. The padding and gap between elements is 10px (hint: see flex gap). The border around elements is 1px solid black</p>
+        <div style="display: flex; padding: 10px; width: 350px; border: 1px solid black; flex-wrap: wrap; gap: 10px">
+          <div style="border: 1px solid black; width: 100px; height: 100px">W=100px, H=100px</div>
+          <div style="border: 1px solid black; width: 100px; height: 120px">W=100px, H=120px</div>
+          <div style="border: 1px solid black; width: 100px; height: 140px">W=100px, H=140px</div>
+          <div style="border: 1px solid black; width: 100px; height: 160px">W=100px, H=160px</div>
+          <div style="border: 1px solid black; width: 100px; height: 100px">W=100px, H=100px</div>
+        </div>
+      </li>
+
+      <li>
+        <div class="section-title">Flex box: wrapping and item alignment</div>
+        <p>Task: Use CSS flexbox to arrange 5 divs as shown below. The divs must be aligned to the bottom</p>
+        <div style="display: flex; padding: 10px; width: 350px; border: 1px solid black; flex-wrap: wrap; gap: 10px; align-items: flex-end;">
+          <div style="border: 1px solid black; width: 100px; height: 100px">W=100px, H=100px</div>
+          <div style="border: 1px solid black; width: 100px; height: 120px">W=100px, H=120px</div>
+          <div style="border: 1px solid black; width: 100px; height: 140px">W=100px, H=140px</div>
+          <div style="border: 1px solid black; width: 100px; height: 160px">W=100px, H=160px</div>
+          <div style="border: 1px solid black; width: 100px; height: 100px">W=100px, H=100px</div>
+        </div>
+      </li>
+
+      <li>
+        <div class="section-title">Change CSS when an event happens</div>
+        <p>Task: Make a red div with. Use CSS only to change the color of the div to green when you hover over it and red while it is being clicked.</p>
+        <p>The div will normally look like this</p>
+        <div class="changer-1">W=100px, H=50px</div>
+        <p>It should look like this when you hover your mouse on it. It will turn back to normal when you take your mouse away</p>
+        <div class="changer-1 changer-1-on-hover">W=100px, H=50px</div>
+        <p>It should look like this when you click on it but it will go back to normal when you stop clicking</p>
+        <div class="changer-1 changer-1-on-active">W=100px, H=50px</div>
+        <p>Hint: You will need to define the CSS for this task in a CSS file or inside a <code>&lt;style/&gt;</code> tag</p>
+      </li>
+
+      <li>
+        <div class="section-title">Fancy tactile button</div>
+        <p>Task: Make a div that has the following properties. It has an internal padding of 8px, width of 8px, background color of #eee (try to understand what this is), bottom bar color of #888</p>
+        <p>The div will normally look like this</p>
+        <div class="fancy-button">W=150px, padding=8px, bottom bar=10px</div>
+        <p>It should look like this when you hover your mouse on it. It will turn back to normal when you take your mouse away</p>
+        <div class="fancy-button fancy-button-on-hover">W=150px, padding=8px, bottom bar=7px</div>
+        <p>It should look like this when you click on it but it will go back to normal when you stop clicking</p>
+        <div class="fancy-button fancy-button-on-active">W=150px, padding=8px, bottom bar=3px</div>
+        <p>Hint: You will need to define the CSS for this task in a CSS file or inside a <code>&lt;style/&gt;</code> tag</p>
+        <p>Note: When the hover and click events happen, the button should appear as if it is shifting down. Let me know if you need to see what this looks like</p>
+      </li>
+
+      <li>
+        <div class="section-title">Fancy tactile button with different cursor</div>
+        <p>Task: Use the fancy tactile button from above. Change the mouse cursor to a hand with the index finger up (called "pointer") when you hover over the button. Try experimenting with other cursor types that are available in the browser console.</p>
+      </li>
+
+      <li>
+        <div class="section-title">List of your top 10 favorite songs using the Fancy tactile button</div>
+        <p>Task: Use the fancy tactile button from above to create a list of your top 10 (or more) favorite songs. Use flex box wrapping. Padding and flex gap on the container is 10px. The container width must be 1000px. The song title must be bold. The artist name must be color #888 and must be italics</p>
+        <div style="border: 1px solid black; padding: 10px; width: 1000px; display: flex; gap: 10px; flex-wrap: wrap; align-items: flex-start">
+          <div class="fancy-button">
+            <div class="song-title">Pieces</div>
+            <div class="song-artist">by Andrew Belle</div>
+          </div>
+          <div class="fancy-button">
+            <div class="song-title">No Role Modelz</div>
+            <div class="song-artist">by J Cole</div>
+          </div>
+          <div class="fancy-button">
+            <div class="song-title">Too Deep for the Intro</div>
+            <div class="song-artist">by J Cole</div>
+          </div>
+          <div class="fancy-button">
+            <div class="song-title">Viva La Vida</div>
+            <div class="song-artist">by Coldplay</div>
+          </div>
+          <div class="fancy-button">
+            <div class="song-title">Yellow</div>
+            <div class="song-artist">by Coldplay</div>
+          </div>
+          <div class="fancy-button">
+            <div class="song-title">Clocks</div>
+            <div class="song-artist">by Coldplay</div>
+          </div>
+          <div class="fancy-button">
+            <div class="song-title">Beautiful</div>
+            <div class="song-artist">by Akon ft. Colby O'Donnis</div>
+          </div>
+          <div class="fancy-button">
+            <div class="song-title">Troublemaker</div>
+            <div class="song-artist">by Akon ft. Sweet Rush</div>
+          </div>
+          <div class="fancy-button">
+            <div class="song-title">I'm So Paid</div>
+            <div class="song-artist">by Akon ft. Lil' Wayne</div>
+          </div>
+          <div class="fancy-button">
+            <div class="song-title">Black Bear</div>
+            <div class="song-artist">by Andrew Belle</div>
+          </div>
+        </div>
+      </li>
+    </ol>
+  </body>
+</html>
