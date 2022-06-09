@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="./favicon.ico" type="image/x-icon">
+    <title>q39</title>
+
+    <script>
+      let currentCount = 0;
+
+      function setCount(newValue) {
+        currentCount = newValue;
+        if (currentCount < 0) {
+          currentCount = 0;
+        }
+        document.querySelector('#current-count').innerHTML = currentCount;
+      }
+
+      function increaseCount() {
+        setCount(currentCount + 1);
+      }
+
+      function decreaseCount() {
+        setCount(currentCount - 1);
+      }
+    </script>
+  </head>
+
+  <body>
+    <button onclick="decreaseCount()">-</button>
+    <span id="current-count">0</span>
+    <button onclick="increaseCount()">+</button>
+  </body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="./favicon.ico" type="image/x-icon">
+    <title>q41</title>
+
+    <style>
+      tr th {
+        text-align: left;
+        padding-right: 16px;
+      }
+    </style>
+
+    <script>
+      function generate() {
+        const minLimit = Number(document.querySelector('#min-limit').value);
+        const maxLimit = Number(document.querySelector('#max-limit').value);
+        const num = Math.round((Math.random() * (maxLimit - minLimit)) + minLimit);
+
+        document.querySelector('#num-holder').innerHTML = num;
+      }
+    </script>
+  </head>
+
+  <body>
+    <table>
+      <tbody>
+        <tr>
+          <th>Min limit</th>
+          <td><input id="min-limit" type="number"/></td>
+        </tr>
+        <tr>
+          <th>Max limit</th>
+          <td><input id="max-limit" type="number"/></td>
+        </tr>
+      </tbody>
+    </table>
+    <button onclick="generate()">Generate random</button>
+
+    <div>
+      <strong>Generated num: </strong>
+      <span id="num-holder"></span>
+    </div>
+  </body>
+</html>
