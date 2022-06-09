@@ -1,0 +1,30 @@
+# Ideas
+
+- [ ] JS - random number generator
+- [ ] JS - Counter
+- [ ] JS - Counter using classes
+- [ ] JS - Calculator
+- [ ] JS - Live time (digital)
+- [ ] JS - dice
+- [ ] JS - div that can be toggled between being colored and being transparent
+- [ ] JS - div whose bg color can be set based on a color input's value
+- [ ] JS - Draw on a 16x16 div grid
+  - On click, the div gets colored whatever is picked in the color input
+- [ ] JS - Todo list
+  - Ability to add and remove
+- [ ] No JS - svg shapes
+- [ ] No JS - svg analog clock
+- [ ] JS - Live time (analog)
+- [ ] JS - Show alert after some time
+- [ ] JS - Show alert after some time using promises
+- [ ] JS - Use APIs
+  - Github API?
+- [ ] JS - game - simon says
+- [ ] JS - game - hangman
+- [ ] JS - game - snakes and ladders
+- [ ] JS - game - ludo
+- [ ] JS - game - math game
+  - Encapsulation and making it hard to access state in the global context
+- [ ] JS,webRTC - real messaging app
+- [ ] JS,webRTC - game - battle ships
+  - Using web RTC
