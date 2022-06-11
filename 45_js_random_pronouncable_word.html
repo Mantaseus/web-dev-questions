@@ -14,7 +14,8 @@
     </style>
 
     <script>
-      const charList = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%&*-_';
+      const VOWELS = 'a,ai,au,e,ea,ee,i,ia,io,o,oa,oi,oo,ou,u'.split(',')
+      const CONSONANTS = 'b,c,ch,cl,d,f,ff,g,gh,gl,j,k,l,ll,m,mn,n,p,ph,ps,r,rh,s,sc,sh,sk,st,t,th,v,w,x,y,z'.split(',')
 
       function generate() {
         const charLen = Number(document.querySelector('#char-len').value);
@@ -28,13 +29,20 @@
       }
 
       function generateOne(length) {
-        return Array(length).fill(0)
-          .map(() => pickRandomChar())
-          .join('');
+        let text = '';
+        let appendVowel = Math.floor(Math.random() * 2) === 0;
+        while (text.length < length) {
+          const newText = `${text}${appendVowel ? pickRandomChar(VOWELS) : pickRandomChar(CONSONANTS)}`;
+          if (newText.length <= length) {
+            text = newText
+            appendVowel = !appendVowel;
+          }
+        }
+        return text;
       }
 
-      function pickRandomChar() {
-        return charList.charAt(Math.round(Math.random() * (charList.length - 1)));
+      function pickRandomChar(charList) {
+        return charList[Math.round(Math.random() * (charList.length - 1))];
       }
     </script>
   </head>
@@ -54,7 +62,6 @@
     </table>
     <button onclick="generate()">Generate random</button>
 
-    <div><strong>Password(s): </strong></div>
     <code><div id="text-holder"></div></code>
   </body>
 </html>
