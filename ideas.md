@@ -1,9 +1,9 @@
 # Ideas
 
-- [ ] JS - random number generator
-- [ ] JS - Counter
-- [ ] JS - Counter using classes
-- [ ] JS - Calculator
+- [X] JS - random number generator
+- [X] JS - Counter
+- [-] JS - Counter using classes
+- [X] JS - Calculator
 - [ ] JS - Live time (digital)
 - [ ] JS - div that can be toggled between being colored and being transparent
 - [ ] JS - div whose bg color can be set based on a color input's value
