@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="./favicon.ico" type="image/x-icon">
+    <title>q47</title>
+
+    <script>
+      function calculate() {
+        const num1 = Number(document.querySelector('#num-1').value);
+        const num2 = Number(document.querySelector('#num-2').value);
+        const operator = document.querySelector('#operator').value;
+        console.log({ num1, num2, operator });
+
+        let result = NaN;
+        switch(operator) {
+          case '+': result = num1 + num2; break;
+          case '-': result = num1 - num2; break;
+          case 'x': result = num1 * num2; break;
+          case '/': result = num1 / num2; break;
+        }
+
+        document.querySelector('#result').innerHTML = result;
+      }
+    </script>
+  </head>
+
+  <body>
+    <input type="number" id="num-1"/>
+    <select id="operator">
+      <option value="+">+</option>
+      <option value="-">-</option>
+      <option value="x">x</option>
+      <option value="/">/</option>
+    </select>
+    <input type="number" id="num-2"/>
+
+    <button onclick="calculate()">=</button>
+    <span id="result"></span>
+  </body>
+</html>

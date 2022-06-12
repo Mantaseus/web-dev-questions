@@ -5,7 +5,6 @@
 - [ ] JS - Counter using classes
 - [ ] JS - Calculator
 - [ ] JS - Live time (digital)
-- [ ] JS - dice
 - [ ] JS - div that can be toggled between being colored and being transparent
 - [ ] JS - div whose bg color can be set based on a color input's value
 - [ ] JS - Draw on a 16x16 div grid
@@ -13,6 +12,7 @@
 - [ ] JS - Todo list
   - Ability to add and remove
 - [ ] No JS - svg shapes
+- [ ] JS - dice
 - [ ] No JS - svg analog clock
 - [ ] JS - Live time (analog)
 - [ ] JS - Show alert after some time
