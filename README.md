@@ -1,4 +1,6 @@
-# Ideas
+# Questions for Navleen
+
+## Ideas
 
 - [X] JS - random number generator
 - [X] JS - Counter
