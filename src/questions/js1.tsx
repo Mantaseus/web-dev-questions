@@ -1,6 +1,11 @@
 import { useEffect } from "react";
+import { ArgsIntructionData, ResultInstructionData, Instructions } from "../components/Instructions";
 import { createSetupTest } from "../console_test";
 
+const args: ArgsIntructionData[] = [
+  { name: 'array', type: 'number[]' },
+]
+const returns: ResultInstructionData = { type: 'number[]' }
 const setupTest = createSetupTest<(array: number[]) => number[]>(
   [
     [[1,1,1,1]],
@@ -26,23 +31,7 @@ export const Question: React.FC = () => {
         <li>An argument of <code>[1,1,2,1]</code> will return an array like <code>[2]</code> because your function will take out all the <code>1</code> from the original array and leave behind the <code>2</code></li>
       </ol>
 
-      <h4>Instructions</h4>
-      <ol>
-        <li>Open your browser console and run the code below</li>
-        <li>Tweak the code in the console and run it until all the tests succeed</li>
-      </ol>
-      <pre>
-        {`
-/**
- * @param array - number[]
- * @returns number[]
- **/
-function mySolution(array) {
-
-}
-test(mySolution)
-        `.trim()}
-      </pre>
+      <Instructions args={args} returns={returns} />
 
       <h4>Requirements</h4>
       <ul>
