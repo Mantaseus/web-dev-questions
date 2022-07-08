@@ -10,4 +10,26 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+  padding: 0 0.25rem;
+  background-color: #ddd;
+  border-radius: 0.25rem;
+}
+
+pre {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+  padding: 0.5rem 1rem;
+  background-color: #eee;
+  border: 1px solid #ddd;
+  border-radius: 0.25rem;
+}
+
+.page {
+  display: flex;
+  justify-content: center;
+  padding: 1rem;
+  box-sizing: border-box;
+}
+.page > .question-container {
+  max-width: 50rem;
 }

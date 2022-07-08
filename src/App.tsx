@@ -1,14 +1,13 @@
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
 
 import './App.css'
-import * as q48 from './q48';
-import * as q49 from './q49';
+import * as js1 from './questions/js1';
 
-const PAGES = { q48, q49 };
+const PAGES = { js1 };
 
 const PageList: React.FC = () => {
   return <div className="page-list">
-    {Object.entries(PAGES).map(([pageName]) => <Link to={pageName}>{pageName}</Link>)}
+    {Object.entries(PAGES).map(([pageName]) => <Link key={pageName} to={pageName}>{pageName}</Link>)}
   </div>;
 };
 
@@ -17,7 +16,7 @@ export function App() {
     <Routes>
       <Route path="/">
         <Route index element={<PageList/>}/>
-        {Object.entries(PAGES).map(([pageName, { Question }]) => <Route path={pageName} element={<Question/>}/>)}
+        {Object.entries(PAGES).map(([pageName, { Question }]) => <Route key={pageName} path={pageName} element={<Question/>}/>)}
       </Route>
     </Routes>
   </BrowserRouter>);
