@@ -23,3 +23,7 @@
 .ideal-solution-container pre {
   overflow: auto;
 }
+
+small.muted {
+  color: #aaa;
+}

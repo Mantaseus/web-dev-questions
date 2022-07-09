@@ -1,9 +1,11 @@
 import { useEffect } from "react";
 import { useLocation } from 'react-router-dom';
 import { Badges } from "../components/Badges";
+import { useQuestionKey } from "../components/hooks";
 import { IdealSolution } from "../components/IdealSolution";
 import { ArgsIntructionData, ResultInstructionData, Instructions } from "../components/Instructions";
-import { createSetupTest } from "../console_test";
+import { QuestionHeader } from "../components/QuestionHeader";
+import { createTestSetupFunc } from "../console_test";
 
 export const name = 'filter';
 export const badges = ['Array.filter'];
@@ -12,7 +14,7 @@ const args: ArgsIntructionData[] = [
   { name: 'array', type: 'number[]' },
 ]
 const returns: ResultInstructionData = { type: 'number[]' }
-const setupTest = createSetupTest<(array: number[]) => number[]>(
+const tests = createTestSetupFunc<(array: number[]) => number[]>(
   [
     [[1,1,1,1]],
     [[1,1,2,1]],
@@ -21,14 +23,10 @@ const setupTest = createSetupTest<(array: number[]) => number[]>(
 );
 
 export const Question: React.FC = () => {
-  useEffect(setupTest, []);
-  const location = useLocation();
-  const questionNum = location.pathname.replace('/', '');
-
+  tests.useTestSetup();
   return <div className="page">
     <div className="question-container">
-      <h2>{questionNum}. {name}</h2>
-      <Badges badges={badges}/>
+      <QuestionHeader title={name} badges={badges}/>
 
       <p>
         Create a function that removes all occurances of the number <code>1</code> from an array
@@ -42,7 +40,7 @@ export const Question: React.FC = () => {
       </ol>
 
       <Instructions args={args} returns={returns} />
-      <IdealSolution func={setupTest.idealSolution} />
+      <IdealSolution func={tests.idealSolution} />
     </div>
   </div>;
 };
