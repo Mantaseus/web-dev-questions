@@ -76,16 +76,17 @@ export function createTestSetupFunc<F extends AnyFunc>(testArgs: Parameters<F>[]
           }
 
           const prevQuestionData = getQuestionData(questionKey);
+          const now = new Date().toISOString();
           storeQuestionData(questionKey, {
             isCompleted: prevQuestionData?.isCompleted || succeeded,
             completedTime: prevQuestionData?.completedTime
               ? prevQuestionData.completedTime
               : succeeded
-                ? new Date().toISOString()
+                ? now
                 : null,
             lastAttemptCode: func.toString(),
             lastAttemptResult: attemptResult,
-            lastAttemptTime: new Date().toISOString(),
+            lastAttemptTime: now,
           })
         }
       }, [questionKey])

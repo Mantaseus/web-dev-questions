@@ -5,6 +5,7 @@ import { useQuestionKey } from "../components/hooks";
 import { IdealSolution } from "../components/IdealSolution";
 import { ArgsIntructionData, ResultInstructionData, Instructions } from "../components/Instructions";
 import { QuestionHeader } from "../components/QuestionHeader";
+import { UserLastAttemptCode } from "../components/UserLastAttemptCode";
 import { createTestSetupFunc } from "../console_test";
 
 export const name = 'filter';
@@ -39,6 +40,7 @@ export const Question: React.FC = () => {
         <li>An argument of <code>[1,1,2,1]</code> will return an array like <code>[2]</code> because your function will take out all the <code>1</code> from the original array and leave behind the <code>2</code></li>
       </ol>
 
+      <UserLastAttemptCode/>
       <Instructions args={args} returns={returns} />
       <IdealSolution func={tests.idealSolution} />
     </div>
