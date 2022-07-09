@@ -7,8 +7,9 @@ export function useQuestionKey() {
   return location.pathname.replace('/', '');
 }
 
-export function useQuestionData() {
-  const questionKey = useQuestionKey();
+export function useQuestionData(key?: string) {
+  const keyFromURL = useQuestionKey();
+  const questionKey = key || keyFromURL;
   const data = useMemo(() => getQuestionData(questionKey), [questionKey]);
   return {
     ...data,

@@ -1,11 +1,27 @@
 .page-list {
+  width: 100%;
   display: flex;
-  flex-direction: column;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.page-list > table {
+  width: 100%;
+  max-width: 40rem;
+  border-collapse: collapse;
+}
+.page-list table td {
+  padding: 0.5rem;
+  vertical-align: top;
+}
+.page-list table tr:hover {
+  cursor: pointer;
+  background-color: #eee;
 }
 
 .badge-list {
   display: flex;
-  gap: 0.5rem;
+  gap: 0.25rem;
 }
 .badge-list .badge {
   padding: 0.125rem 0.5rem;
