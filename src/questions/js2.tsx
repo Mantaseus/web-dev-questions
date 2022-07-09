@@ -22,8 +22,8 @@ export const Question: React.FC = () => <QuestionWrapper {...questionWrapperProp
     It should return an object with the following keys and values
   </p>
   <ul>
-    <li>id</li> key will have an associated value of the <code>id</code> argument that was given to the function
-    <li>name</li> key will have an associated value of the <code>name</code> argument that was given to the function
+    <li><code>id</code> key will have an associated value of the <code>id</code> argument that was given to the function</li>
+    <li><code>name</code> key will have an associated value of the <code>name</code> argument that was given to the function</li>
   </ul>
 
   <h4>Examples</h4>
