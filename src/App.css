@@ -52,3 +52,7 @@
   font-size: smaller;
   color: #aaa;
 }
+
+.page summary {
+  cursor: pointer;
+}
