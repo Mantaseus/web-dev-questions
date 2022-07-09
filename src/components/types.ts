@@ -1,7 +1,7 @@
 import { JSBeautifyOptions } from "js-beautify";
 
 export const jsBeautifyOptions: JSBeautifyOptions = {
-  indent_size: 4,
+  indent_size: 2,
   indent_char: " ",
   max_preserve_newlines: 5,
   preserve_newlines: true,
@@ -17,4 +17,3 @@ export const jsBeautifyOptions: JSBeautifyOptions = {
   e4x: false,
   indent_empty_lines: false,
 };
-
