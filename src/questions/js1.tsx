@@ -1,12 +1,11 @@
 import { useEffect } from "react";
 import { useLocation } from 'react-router-dom';
+import { Badges } from "../components/Badges";
 import { ArgsIntructionData, ResultInstructionData, Instructions } from "../components/Instructions";
 import { createSetupTest } from "../console_test";
 
 export const name = 'filter';
-export const badges = [
-  'Array.filter',
-]
+export const badges = ['Array.filter'];
 
 const args: ArgsIntructionData[] = [
   { name: 'array', type: 'number[]' },
@@ -28,8 +27,7 @@ export const Question: React.FC = () => {
   return <div className="page">
     <div className="question-container">
       <h2>{questionNum}. {name}</h2>
-
-      <div className="badge-list">{badges.map(badge => <div key={badge} className="badge">{badge}</div>)}</div>
+      <Badges badges={badges}/>
 
       <p>
         Create a function that removes all occurances of the number <code>1</code> from an array
