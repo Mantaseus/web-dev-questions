@@ -1,7 +1,7 @@
 import { QuestionWrapper, Props as QuestionWrapperProps } from "../components/QuestionWrapper";
 
-export const title = 'filter';
-export const badges = ['Array.filter'];
+export const title = 'Filter a number out of an array of numbers';
+export const badges = ['JS', 'Array.filter'];
 
 const questionWrapperProps: QuestionWrapperProps<(array: number[]) => number[]> = {
   title,

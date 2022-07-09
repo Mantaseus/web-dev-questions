@@ -4,8 +4,9 @@ import './App.css'
 import { Badges } from './components/Badges';
 import { useQuestionData } from './components/hooks';
 import * as js1 from './questions/js1';
+import * as js2 from './questions/js2';
 
-const PAGES = { js1 };
+const PAGES = { js1, js2 };
 
 const PageList: React.FC = () => {
   const navigate = useNavigate();

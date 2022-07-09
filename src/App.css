@@ -9,6 +9,7 @@
   width: 100%;
   max-width: 40rem;
   border-collapse: collapse;
+  table-layout: fixed;
 }
 .page-list table td {
   padding: 0.5rem;
