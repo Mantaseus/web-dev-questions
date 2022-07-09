@@ -3,7 +3,7 @@ import equal from 'deep-equal';
 type AnyFunc = (...args: any[]) => any;
 
 export function createSetupTest<F extends AnyFunc>(testArgs: Parameters<F>[], idealSolution: F) {
-  return () => {
+  const setupTest = () => {
     (window as any).test = async (func: F) => {
       console.clear();
       for (let i = 0; i < testArgs.length; i++) {
@@ -38,5 +38,11 @@ export function createSetupTest<F extends AnyFunc>(testArgs: Parameters<F>[], id
       }
     }
   }
+
+  setupTest.idealSolution = idealSolution;
+  setupTest.testArgs = testArgs;
+  console.log(setupTest)
+
+  return setupTest;
 }
 

@@ -15,6 +15,11 @@
   font-size: smaller;
 }
 
+.ideal-solution-container,
 .instructions-container {
   padding: 1rem 0;
+}
+
+.ideal-solution-container pre {
+  overflow: auto;
 }

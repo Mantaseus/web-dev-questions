@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useLocation } from 'react-router-dom';
 import { Badges } from "../components/Badges";
+import { IdealSolution } from "../components/IdealSolution";
 import { ArgsIntructionData, ResultInstructionData, Instructions } from "../components/Instructions";
 import { createSetupTest } from "../console_test";
 
@@ -16,7 +17,7 @@ const setupTest = createSetupTest<(array: number[]) => number[]>(
     [[1,1,1,1]],
     [[1,1,2,1]],
   ],
-  (arr) => arr.filter(num => num !== 1)
+  arr => arr.filter(num => num !== 1)
 );
 
 export const Question: React.FC = () => {
@@ -41,6 +42,7 @@ export const Question: React.FC = () => {
       </ol>
 
       <Instructions args={args} returns={returns} />
+      <IdealSolution func={setupTest.idealSolution} />
     </div>
   </div>;
 };
