@@ -4,6 +4,9 @@ import { ArgsIntructionData, ResultInstructionData, Instructions } from "../comp
 import { createSetupTest } from "../console_test";
 
 export const name = 'filter';
+export const badges = [
+  'Array.filter',
+]
 
 const args: ArgsIntructionData[] = [
   { name: 'array', type: 'number[]' },
@@ -26,6 +29,8 @@ export const Question: React.FC = () => {
     <div className="question-container">
       <h2>{questionNum}. {name}</h2>
 
+      <div className="badge-list">{badges.map(badge => <div key={badge} className="badge">{badge}</div>)}</div>
+
       <p>
         Create a function that removes all occurances of the number <code>1</code> from an array
         of numbers (passed in as an argument to your function)
@@ -38,11 +43,6 @@ export const Question: React.FC = () => {
       </ol>
 
       <Instructions args={args} returns={returns} />
-
-      <h4>Requirements</h4>
-      <ul>
-        <li>Only use <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter">Array.filter()</a></li>
-      </ul>
     </div>
   </div>;
 };
