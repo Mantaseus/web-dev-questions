@@ -17,7 +17,8 @@ const PageList: React.FC = () => {
         {Object.entries(PAGES).map(([questionKey, page]) => {
           const questionData = useQuestionData(questionKey)
           return (<tr key={questionKey} onClick={() => navigate(questionKey)}>
-            <td><strong>{questionKey}. {page.title}</strong></td>
+            <td className="fit"><strong>{questionKey}</strong></td>
+            <td><strong>{page.title}</strong></td>
             <td>
               <Badges questionData={questionData} badges={page.badges}/>
               <div className="text-muted-sm" style={{ marginTop: '0.5rem' }}>

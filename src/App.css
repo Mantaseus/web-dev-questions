@@ -7,9 +7,8 @@
 
 .page-list > table {
   width: 100%;
-  max-width: 40rem;
+  max-width: 50rem;
   border-collapse: collapse;
-  table-layout: fixed;
 }
 .page-list table td {
   padding: 0.5rem;
@@ -56,4 +55,8 @@
 
 .page summary {
   cursor: pointer;
+}
+
+table td.fit {
+  width: 1px;
 }

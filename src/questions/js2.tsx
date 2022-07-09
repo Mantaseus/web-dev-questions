@@ -1,6 +1,6 @@
 import { QuestionWrapper, Props as QuestionWrapperProps } from "../components/QuestionWrapper";
 
-export const title = 'Object manipulation';
+export const title = 'Create an object';
 export const badges = ['JS', 'Object'];
 
 const questionWrapperProps: QuestionWrapperProps<(id: number, name: string) => { id: number, name: string }> = {
