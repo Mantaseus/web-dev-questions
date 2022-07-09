@@ -16,7 +16,7 @@ export interface Props {
 export const Instructions: React.FC<Props> = ({ args, returns }) => {
   const code = `
 /**
-${args.map(arg => ` * @param ${arg.name} - ${arg.type}${arg.description ? ` - ${arg.description}` : ''}`)}
+${args.map(arg => ` * @param ${arg.name} - ${arg.type}${arg.description ? ` - ${arg.description}` : ''}`).join('\n')}
  * @returns ${returns.type}${returns.description ? ` - ${returns.description}` : ''}
  **/
 function mySolution(${args.map(arg => arg.name).join(', ')}) {

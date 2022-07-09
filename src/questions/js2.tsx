@@ -7,9 +7,10 @@ const questionWrapperProps: QuestionWrapperProps<(id: number, name: string) => {
   title,
   badges,
   funcArgsDoc: [
-    { name: 'array', type: 'number[]' },
+    { name: 'id', type: 'number' },
+    { name: 'name', type: 'string' },
   ],
-  funcReturnDoc: { type: 'number[]' },
+  funcReturnDoc: { type: '{ id: number, name: string }' },
   testArgs: [
     [101, 'John Doe'],
   ],

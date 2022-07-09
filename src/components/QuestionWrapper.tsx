@@ -5,11 +5,13 @@ import { IdealSolution } from "./IdealSolution";
 import { ArgsInstructionData, Instructions, ResultInstructionData } from "./Instructions";
 import { UserLastAttemptCode } from "./UserLastAttemptCode";
 
-export interface Props<F extends AnyFunc> {
-  testArgs: Parameters<F>[];
+export interface Props<F extends AnyFunc, P = Parameters<F>> {
+  testArgs: P[];
   idealSolution: F;
   title: string;
-  funcArgsDoc: ArgsInstructionData[];
+  funcArgsDoc: {
+    [K in keyof P]: ArgsInstructionData
+  };
   funcReturnDoc: ResultInstructionData;
   badges?: string[];
 }
@@ -35,7 +37,7 @@ export const QuestionWrapper = <F extends AnyFunc>({
       {children}
 
       <UserLastAttemptCode questionData={questionData}/>
-      <Instructions args={funcArgsDoc} returns={funcReturnDoc} />
+      <Instructions args={funcArgsDoc as unknown as ArgsInstructionData[]} returns={funcReturnDoc} />
       <IdealSolution func={idealSolution} />
     </div>
   </div>;
