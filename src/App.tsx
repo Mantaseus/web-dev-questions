@@ -7,7 +7,7 @@ const PAGES = { js1 };
 
 const PageList: React.FC = () => {
   return <div className="page-list">
-    {Object.entries(PAGES).map(([pageName]) => <Link key={pageName} to={pageName}>{pageName}</Link>)}
+    {Object.entries(PAGES).map(([pageName, page]) => <Link key={pageName} to={pageName}>{pageName}. {page.name}</Link>)}
   </div>;
 };
 

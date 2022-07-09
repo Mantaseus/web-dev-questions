@@ -1,6 +1,9 @@
 import { useEffect } from "react";
+import { useLocation } from 'react-router-dom';
 import { ArgsIntructionData, ResultInstructionData, Instructions } from "../components/Instructions";
 import { createSetupTest } from "../console_test";
+
+export const name = 'filter';
 
 const args: ArgsIntructionData[] = [
   { name: 'array', type: 'number[]' },
@@ -16,9 +19,12 @@ const setupTest = createSetupTest<(array: number[]) => number[]>(
 
 export const Question: React.FC = () => {
   useEffect(setupTest, []);
+  const location = useLocation();
+  const questionNum = location.pathname.replace('/', '');
+
   return <div className="page">
     <div className="question-container">
-      <h2>js1. filter</h2>
+      <h2>{questionNum}. {name}</h2>
 
       <p>
         Create a function that removes all occurances of the number <code>1</code> from an array
