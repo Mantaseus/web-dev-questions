@@ -31,3 +31,8 @@
   display: block;
   color: #aaa;
 }
+
+.text-muted-sm {
+  font-size: smaller;
+  color: #aaa;
+}

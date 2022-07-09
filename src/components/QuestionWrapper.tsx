@@ -1,8 +1,8 @@
-import { AnyFunc, TestData, useSetupTestFunction } from "../console_test";
-import { useQuestionData, useQuestionKey } from "./hooks";
+import { AnyFunc, useSetupTestFunction } from "../console_test";
+import { Badges } from "./Badges";
+import { useQuestionData } from "./hooks";
 import { IdealSolution } from "./IdealSolution";
 import { ArgsIntructionData, Instructions, ResultInstructionData } from "./Instructions";
-import { QuestionHeader } from "./QuestionHeader";
 import { UserLastAttemptCode } from "./UserLastAttemptCode";
 
 export interface Props<F extends AnyFunc> {
@@ -22,7 +22,15 @@ export const QuestionWrapper = <F extends AnyFunc>({
 
   return <div className="page">
     <div className="question-container">
-      <QuestionHeader questionData={questionData} title={title} badges={badges}/>
+      <h2>{questionData.key}. {title}</h2>
+      <Badges questionData={questionData} badges={badges}/>
+
+      <div className="text-muted-sm" style={{ marginTop: '0.5rem' }}>
+        {questionData.lastAttemptTime && `Last attempted: ${new Date(questionData.lastAttemptTime).toLocaleString()}`}
+      </div>
+      <div className="text-muted-sm">
+        {questionData.completedTime && `Completed: ${new Date(questionData.completedTime).toLocaleString()}`}
+      </div>
 
       {children}
 
