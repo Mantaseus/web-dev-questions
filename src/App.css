@@ -24,6 +24,10 @@
   overflow: auto;
 }
 
-small.muted {
+.question-attempt-info {
+  margin-top: 0.5rem;
+}
+.question-attempt-info small {
+  display: block;
   color: #aaa;
 }
