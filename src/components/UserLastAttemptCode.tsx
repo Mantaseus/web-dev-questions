@@ -1,11 +1,13 @@
 import beautify, { JSBeautifyOptions } from 'js-beautify';
 
-import { useQuestionData } from "./hooks";
+import type { useQuestionData } from "./hooks";
 import { jsBeautifyOptions } from './types';
 
-export const UserLastAttemptCode: React.FC = () => {
-  const questionData = useQuestionData();
+export interface Props {
+  questionData: ReturnType<typeof useQuestionData>;
+}
 
+export const UserLastAttemptCode: React.FC<Props> = ({ questionData }) => {
   if (!questionData.lastAttemptCode) {
     return null;
   }

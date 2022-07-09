@@ -3,15 +3,20 @@ import { useEffect } from 'react';
 
 import { useQuestionKey } from './components/hooks';
 
-type AnyFunc = (...args: any[]) => any;
+export type AnyFunc = (...args: any[]) => any;
 
-type AttemptResult = 'success' | 'fail' | 'error';
-type QuestionData = {
+export type AttemptResult = 'success' | 'fail' | 'error';
+export interface QuestionData {
   isCompleted: boolean;
   completedTime: string | null;
   lastAttemptResult: AttemptResult;
   lastAttemptCode: string;
   lastAttemptTime: string;
+}
+
+export interface TestData<F extends AnyFunc = AnyFunc> {
+  testArgs: Parameters<F>[];
+  idealSolution: F;
 }
 
 const storageKeySuffix = '_data';
@@ -27,69 +32,62 @@ export function getQuestionData(questionKey: string) {
     : JSON.parse(rawData) as QuestionData;
 }
 
-export function createTestSetupFunc<F extends AnyFunc>(testArgs: Parameters<F>[], idealSolution: F) {
-  return {
-    idealSolution,
-    testArgs,
-    useTestSetup: () => {
-      const questionKey = useQuestionKey();
-      useEffect(() => {
-        (window as any).test = async (func: F) => {
-          console.clear();
+export function useSetupTestFunction<F extends AnyFunc>(questionKey: string, testArgs: Parameters<F>[], idealSolution: F) {
+  useEffect(() => {
+    (window as any).test = async (func: F) => {
+      console.clear();
 
-          let succeeded = true;
-          let attemptResult: AttemptResult = 'success';
+      let succeeded = true;
+      let attemptResult: AttemptResult = 'success';
 
-          for (let i = 0; i < testArgs.length; i++) {
-            const args = testArgs[i];
-            const expected = idealSolution(...args);
+      for (let i = 0; i < testArgs.length; i++) {
+        const args = testArgs[i];
+        const expected = idealSolution(...args);
 
-            const displayObj = [
-              '\nArgs:', ...args.flatMap(arg => ['\n  ', arg]),
-              '\nExpected result:', expected,
-            ]
+        const displayObj = [
+          '\nArgs:', ...args.flatMap(arg => ['\n  ', arg]),
+          '\nExpected result:', expected,
+        ]
 
-            try {
-              const result = await func(...args);
-              if (equal(result, expected)) {
-                console.log(
-                  `%cTest ${i + 1}/${testArgs.length}: Success`, 'color: #89ffa6',
-                  ...displayObj,
-                  '\nYour result:', result,
-                )
-              } else {
-                succeeded = false;
-                attemptResult = 'fail';
-                console.error(`Test ${i + 1}/${testArgs.length}: Your result did not match expected result`,
-                  ...displayObj,
-                  '\nYour result:', result,
-                )
-              }
-            } catch(e) {
-              succeeded = false;
-              attemptResult = 'error';
-              console.error(`Test ${i + 1}/${testArgs.length}: Error occured`,
-                ...displayObj,
-                '\nError from your function:', e,
-              )
-            }
+        try {
+          const result = await func(...args);
+          if (equal(result, expected)) {
+            console.log(
+              `%cTest ${i + 1}/${testArgs.length}: Success`, 'color: #89ffa6',
+              ...displayObj,
+              '\nYour result:', result,
+            )
+          } else {
+            succeeded = false;
+            attemptResult = 'fail';
+            console.error(`Test ${i + 1}/${testArgs.length}: Your result did not match expected result`,
+              ...displayObj,
+              '\nYour result:', result,
+            )
           }
-
-          const prevQuestionData = getQuestionData(questionKey);
-          const now = new Date().toISOString();
-          storeQuestionData(questionKey, {
-            isCompleted: prevQuestionData?.isCompleted || succeeded,
-            completedTime: prevQuestionData?.completedTime
-              ? prevQuestionData.completedTime
-              : succeeded
-                ? now
-                : null,
-            lastAttemptCode: func.toString(),
-            lastAttemptResult: attemptResult,
-            lastAttemptTime: now,
-          })
+        } catch(e) {
+          succeeded = false;
+          attemptResult = 'error';
+          console.error(`Test ${i + 1}/${testArgs.length}: Error occured`,
+            ...displayObj,
+            '\nError from your function:', e,
+          )
         }
-      }, [questionKey])
-    },
-  };
-}
+      }
+
+      const prevQuestionData = getQuestionData(questionKey);
+      const now = new Date().toISOString();
+      storeQuestionData(questionKey, {
+        isCompleted: prevQuestionData?.isCompleted || succeeded,
+        completedTime: prevQuestionData?.completedTime
+          ? prevQuestionData.completedTime
+          : succeeded
+            ? now
+            : null,
+        lastAttemptCode: func.toString(),
+        lastAttemptResult: attemptResult,
+        lastAttemptTime: now,
+      })
+    }
+  }, [questionKey])
+};

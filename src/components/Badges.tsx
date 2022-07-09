@@ -6,11 +6,11 @@ export interface BadgeData {
 }
 
 export interface Props {
+  questionData: ReturnType<typeof useQuestionData>;
   badges?: string[];
 }
 
-export const Badges: React.FC<Props> = ({ badges }) => {
-  const questionData = useQuestionData();
+export const Badges: React.FC<Props> = ({ questionData, badges }) => {
   const fullBadges = (badges || [])
     .map<BadgeData>(text => ({ text }))
     .concat(questionData.isCompleted

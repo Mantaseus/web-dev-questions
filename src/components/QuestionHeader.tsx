@@ -3,16 +3,15 @@ import { BadgeData, Badges } from "./Badges";
 import { useQuestionData, useQuestionKey } from "./hooks";
 
 export interface Props {
+  questionData: ReturnType<typeof useQuestionData>;
   title: string;
   badges?: string[]
 }
 
-export const QuestionHeader: React.FC<Props> = ({ title, badges }) => {
-  const questionData = useQuestionData();
-
+export const QuestionHeader: React.FC<Props> = ({ questionData, title, badges }) => {
   return <>
     <h2>{questionData.key}. {title}</h2>
-    <Badges badges={badges}/>
+    <Badges questionData={questionData} badges={badges}/>
     <div className="question-attempt-info">
       {questionData.lastAttemptTime && <small>
         Last attempted: {new Date(questionData.lastAttemptTime).toLocaleString()}
