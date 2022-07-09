@@ -2,14 +2,14 @@ import { AnyFunc, useSetupTestFunction } from "../console_test";
 import { Badges } from "./Badges";
 import { useQuestionData } from "./hooks";
 import { IdealSolution } from "./IdealSolution";
-import { ArgsIntructionData, Instructions, ResultInstructionData } from "./Instructions";
+import { ArgsInstructionData, Instructions, ResultInstructionData } from "./Instructions";
 import { UserLastAttemptCode } from "./UserLastAttemptCode";
 
 export interface Props<F extends AnyFunc> {
   testArgs: Parameters<F>[];
   idealSolution: F;
   title: string;
-  funcArgsDoc: ArgsIntructionData[];
+  funcArgsDoc: ArgsInstructionData[];
   funcReturnDoc: ResultInstructionData;
   badges?: string[];
 }

@@ -1,4 +1,4 @@
-export interface ArgsIntructionData {
+export interface ArgsInstructionData {
   name: string;
   type: string;
   description?: string;
@@ -9,7 +9,7 @@ export interface ResultInstructionData {
 }
 
 export interface Props {
-  args: ArgsIntructionData[];
+  args: ArgsInstructionData[];
   returns: ResultInstructionData;
 }
 
