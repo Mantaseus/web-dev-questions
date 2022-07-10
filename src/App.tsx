@@ -3,10 +3,7 @@ import { BrowserRouter, Routes, Route, Link, useNavigate } from 'react-router-do
 import './App.css'
 import { Badges } from './components/Badges';
 import { useQuestionData } from './components/hooks';
-import * as js1 from './questions/js1';
-import * as js2 from './questions/js2';
-
-const PAGES = { js1, js2 };
+import { QUESTIONS } from './questions';
 
 const PageList: React.FC = () => {
   const navigate = useNavigate();
@@ -14,7 +11,7 @@ const PageList: React.FC = () => {
   return <div className="page-list">
     <table>
       <tbody>
-        {Object.entries(PAGES).map(([questionKey, page]) => {
+        {Object.entries(QUESTIONS).map(([questionKey, page]) => {
           const questionData = useQuestionData(questionKey)
           return (<tr key={questionKey} onClick={() => navigate(questionKey)}>
             <td className="fit"><strong>{questionKey}</strong></td>
@@ -40,7 +37,7 @@ export function App() {
     <Routes>
       <Route path="/">
         <Route index element={<PageList/>}/>
-        {Object.entries(PAGES).map(([pageName, { Question }]) => <Route key={pageName} path={pageName} element={<Question/>}/>)}
+        {Object.entries(QUESTIONS).map(([pageName, { Question }]) => <Route key={pageName} path={pageName} element={<Question/>}/>)}
       </Route>
     </Routes>
   </BrowserRouter>);
