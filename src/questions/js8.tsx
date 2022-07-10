@@ -16,7 +16,7 @@ const questionWrapperProps: QuestionWrapperProps<
     [[], 10],
   ],
   idealSolution: function mySolution(numArr, multiplier) {
-    return numArr.map(num => num * multiplier)
+    return numArr.map(num => num * multiplier);
   }
 }
 

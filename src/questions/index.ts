@@ -6,7 +6,8 @@ import * as js5 from './js5';
 import * as js6 from './js6';
 import * as js7 from './js7';
 import * as js8 from './js8';
+import * as js9 from './js9';
 
 export const QUESTIONS = {
-  js1, js2, js3, js4, js5, js6, js7, js8
+  js1, js2, js3, js4, js5, js6, js7, js8, js9
 };
