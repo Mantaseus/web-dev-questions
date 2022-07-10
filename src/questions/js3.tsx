@@ -3,13 +3,14 @@ import { QuestionWrapper, Props as QuestionWrapperProps } from "../components/Qu
 export const title = 'Filter an array of strings';
 export const badges = ['JS', 'Array.filter'];
 
-const questionWrapperProps: QuestionWrapperProps<(arrOfStrs: string[]) => string[]> = {
+const questionWrapperProps: QuestionWrapperProps<
+  (arrOfStrs: string[]) => string[]
+> = {
+  funcTsTypeStr: `
+  (arrOfStrs: string[]) => string[]
+  `.trim(),
   title,
   badges,
-  funcArgsDoc: [
-    { name: 'arrOfStrs', type: 'string[]' },
-  ],
-  funcReturnDoc: { type: 'string[]' },
   testArgs: [
     [['abc', 'cba']],
     [['abc', 'xyzabc', 'xaybzc', 'xyz']],

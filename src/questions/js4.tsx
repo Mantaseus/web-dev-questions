@@ -3,13 +3,14 @@ import { QuestionWrapper, Props as QuestionWrapperProps } from "../components/Qu
 export const title = 'All words of a string';
 export const badges = ['JS', 'String.split'];
 
-const questionWrapperProps: QuestionWrapperProps<(str: string) => string[]> = {
+const questionWrapperProps: QuestionWrapperProps<
+  (str: string) => string[]
+> = {
+  funcTsTypeStr: `
+  (str: string) => string[]
+  `.trim(),
   title,
   badges,
-  funcArgsDoc: [
-    { name: 'str', type: 'string' },
-  ],
-  funcReturnDoc: { type: 'string[]' },
   testArgs: [
     ['oh, hello there, my friend'],
     ['how ARE you? Good?'],

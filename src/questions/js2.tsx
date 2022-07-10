@@ -3,14 +3,14 @@ import { QuestionWrapper, Props as QuestionWrapperProps } from "../components/Qu
 export const title = 'Create an object';
 export const badges = ['JS', 'Object'];
 
-const questionWrapperProps: QuestionWrapperProps<(id: number, name: string) => { id: number, name: string }> = {
+const questionWrapperProps: QuestionWrapperProps<
+  (id: number, name: string) => { id: number, name: string }
+> = {
+  funcTsTypeStr: `
+  (id: number, name: string) => { id: number, name: string }
+  `.trim(),
   title,
   badges,
-  funcArgsDoc: [
-    { name: 'id', type: 'number' },
-    { name: 'name', type: 'string' },
-  ],
-  funcReturnDoc: { type: '{ id: number, name: string }' },
   testArgs: [
     [101, 'John Doe'],
   ],

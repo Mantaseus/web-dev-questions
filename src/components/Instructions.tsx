@@ -1,23 +1,22 @@
-export interface ArgsInstructionData {
-  name: string;
-  type: string;
-  description?: string;
-}
-export interface ResultInstructionData {
-  type: string;
-  description?: string;
-}
-
 export interface Props {
-  args: ArgsInstructionData[];
-  returns: ResultInstructionData;
+  tsTypeStr: string;
 }
 
-export const Instructions: React.FC<Props> = ({ args, returns }) => {
+export const Instructions: React.FC<Props> = ({ tsTypeStr }) => {
+  const reMatch = Array.from(tsTypeStr.matchAll(/\((?<argsStr>.*)\) *=> *(?<returns>.*)$/g))[0]
+  const { argsStr = '', returns = '' } = reMatch.groups || {};
+
+  const args = argsStr.split(',')
+    .map(str => str.trim()
+      .split(':')
+      .map(subStr => subStr.trim())
+    )
+    .map(([name, type]) => ({ name, type }));
+
   const code = `
 /**
-${args.map(arg => ` * @param ${arg.name} - ${arg.type}${arg.description ? ` - ${arg.description}` : ''}`).join('\n')}
- * @returns ${returns.type}${returns.description ? ` - ${returns.description}` : ''}
+${args.map(arg => ` * @param ${arg.name} - ${arg.type}`).join('\n')}
+ * @returns ${returns}
  **/
 function mySolution(${args.map(arg => arg.name).join(', ')}) {
 

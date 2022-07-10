@@ -3,13 +3,17 @@ import { QuestionWrapper, Props as QuestionWrapperProps } from "../components/Qu
 export const title = 'Filter a number out of an array of numbers';
 export const badges = ['JS', 'Array.filter'];
 
-const questionWrapperProps: QuestionWrapperProps<(array: number[]) => number[]> = {
+const questionWrapperProps: QuestionWrapperProps<
+  (array: number[]) => number[]
+> = {
+  // I know the following looks a bit dirty but I did it this way because it lets me just copy paste the
+  // type definition from `QuestionWrapperProps` directly without having to think about it too much which
+  // will help reduce human error in the long run
+  funcTsTypeStr: `
+  (array: number[]) => number[]
+  `.trim(),
   title,
   badges,
-  funcArgsDoc: [
-    { name: 'array', type: 'number[]' },
-  ],
-  funcReturnDoc: { type: 'number[]' },
   testArgs: [
     [[1,1,1,1]],
     [[1,1,2,1]],

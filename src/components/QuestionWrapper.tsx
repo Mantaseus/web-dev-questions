@@ -2,22 +2,19 @@ import { AnyFunc, useSetupTestFunction } from "../console_test";
 import { Badges } from "./Badges";
 import { useQuestionData } from "./hooks";
 import { IdealSolution } from "./IdealSolution";
-import { ArgsInstructionData, Instructions, ResultInstructionData } from "./Instructions";
+import { Instructions } from "./Instructions";
 import { UserLastAttemptCode } from "./UserLastAttemptCode";
 
 export interface Props<F extends AnyFunc, P = Parameters<F>> {
   testArgs: P[];
   idealSolution: F;
   title: string;
-  funcArgsDoc: {
-    [K in keyof P]: ArgsInstructionData
-  };
-  funcReturnDoc: ResultInstructionData;
+  funcTsTypeStr: string;
   badges?: string[];
 }
 
 export const QuestionWrapper = <F extends AnyFunc>({
-  testArgs, idealSolution, title, funcArgsDoc, funcReturnDoc, badges, children
+  testArgs, idealSolution, title, funcTsTypeStr, badges, children
 }: React.PropsWithChildren<Props<F>>): React.ReactElement => {
   const questionData = useQuestionData();
   useSetupTestFunction(questionData.key, testArgs, idealSolution);
@@ -37,7 +34,7 @@ export const QuestionWrapper = <F extends AnyFunc>({
       {children}
 
       <UserLastAttemptCode questionData={questionData}/>
-      <Instructions args={funcArgsDoc as unknown as ArgsInstructionData[]} returns={funcReturnDoc} />
+      <Instructions tsTypeStr={funcTsTypeStr} />
       <IdealSolution func={idealSolution} />
     </div>
   </div>;

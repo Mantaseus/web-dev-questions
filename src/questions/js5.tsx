@@ -3,13 +3,14 @@ import { QuestionWrapper, Props as QuestionWrapperProps } from "../components/Qu
 export const title = 'Uppercase every string in an array';
 export const badges = ['JS', 'Array.map', 'String.toUpperCase'];
 
-const questionWrapperProps: QuestionWrapperProps<(strArray: string[]) => string[]> = {
+const questionWrapperProps: QuestionWrapperProps<
+  (strArray: string[]) => string[]
+> = {
+  funcTsTypeStr: `
+  (strArray: string[]) => string[]
+  `.trim(),
   title,
   badges,
-  funcArgsDoc: [
-    { name: 'str', type: 'string' },
-  ],
-  funcReturnDoc: { type: 'string[]' },
   testArgs: [
     [['make', 'ME', 'upper case']],
     [['']],
