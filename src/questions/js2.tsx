@@ -14,7 +14,9 @@ const questionWrapperProps: QuestionWrapperProps<(id: number, name: string) => {
   testArgs: [
     [101, 'John Doe'],
   ],
-  idealSolution: (id, name) => ({ id, name }),
+  idealSolution: function mySolution(id, name) {
+    return { id, name };
+  }
 }
 
 export const Question: React.FC = () => <QuestionWrapper {...questionWrapperProps}>

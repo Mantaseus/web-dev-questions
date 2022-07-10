@@ -14,7 +14,9 @@ const questionWrapperProps: QuestionWrapperProps<(array: number[]) => number[]> 
     [[1,1,1,1]],
     [[1,1,2,1]],
   ],
-  idealSolution: arr => arr.filter(num => num !== 1)
+  idealSolution: function mySolution(array) {
+    return array.filter(num => num !== 1);
+  },
 }
 
 export const Question: React.FC = () => <QuestionWrapper {...questionWrapperProps}>
