@@ -18,6 +18,9 @@
   cursor: pointer;
   background-color: #eee;
 }
+.page-list .page-title {
+  margin-bottom: 0.5rem;
+}
 
 .badge-list {
   display: flex;
