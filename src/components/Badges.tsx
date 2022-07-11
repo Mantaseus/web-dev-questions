@@ -16,7 +16,7 @@ export const Badges: React.FC<Props> = ({ questionData, badges }) => {
     .concat(questionData.isCompleted
       ? { text: 'Completed', style: { backgroundColor: 'green' } }
       : questionData.lastAttemptTime
-        ? { text: 'Attempted', style: { backgroundColor: '#ddd', color: 'black' } }
+        ? { text: 'Attempted', style: { backgroundColor: '#ffcb00', color: 'black' } }
         : { text: 'Not attempted', style: { backgroundColor: '#ddd', color: 'black' } }
     )
 
