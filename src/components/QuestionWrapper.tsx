@@ -34,7 +34,7 @@ export const QuestionWrapper = <F extends AnyFunc>({
       {children}
 
       <UserLastAttemptCode questionData={questionData}/>
-      <Instructions tsTypeStr={funcTsTypeStr} />
+      <Instructions tsTypeStr={funcTsTypeStr} questionData={questionData} />
       <IdealSolution func={idealSolution} />
     </div>
   </div>;

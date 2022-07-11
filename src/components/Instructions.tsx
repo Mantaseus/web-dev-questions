@@ -1,8 +1,11 @@
+import { useQuestionData } from "./hooks";
+
 export interface Props {
   tsTypeStr: string;
+  questionData: ReturnType<typeof useQuestionData>;
 }
 
-export const Instructions: React.FC<Props> = ({ tsTypeStr }) => {
+export const Instructions: React.FC<Props> = ({ tsTypeStr, questionData }) => {
   const reMatch = Array.from(tsTypeStr.matchAll(/\((?<argsStr>.*)\) *=> *(?<returns>.*)$/g))[0]
   const { argsStr = '', returns = '' } = reMatch.groups || {};
 
@@ -25,7 +28,7 @@ test(mySolution)
   `.trim();
 
   return (<div className="instructions-container">
-    <details>
+    <details open={!questionData.lastAttemptTime}>
       <summary><strong>Instructions on writing the code</strong></summary>
       <ol>
         <li>Open your browser console and run the code below</li>
