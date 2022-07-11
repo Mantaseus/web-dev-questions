@@ -13,7 +13,8 @@ import * as js12 from './js12';
 import * as js13 from './js13';
 import * as js14 from './js14';
 import * as js15 from './js15';
+import * as js16 from './js16';
 
 export const QUESTIONS = {
-  js1, js2, js3, js4, js5, js6, js7, js8, js9, js10, js11, js12, js13, js14, js15
+  js1, js2, js3, js4, js5, js6, js7, js8, js9, js10, js11, js12, js13, js14, js15, js16
 };
