@@ -24,8 +24,8 @@ const questionWrapperProps: QuestionWrapperProps<
 export const Question: React.FC = () => <QuestionWrapper {...questionWrapperProps}>
   <p>
     Write a function that takes an array of numbers and returns an array of arrays such that each array in returned array
-    is the slice of the input array from index <code>0</code> to <code>i + 1</code> (where <code>i</code>) is the index of the
-    array within the returned array.
+    is the slice of the input array from index <code>0</code> to <code>i + 1</code> (where <code>i</code> is the index of the
+    array within the returned array).
   </p>
 
   <h4>Examples</h4>

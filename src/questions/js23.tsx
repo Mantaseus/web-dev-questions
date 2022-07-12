@@ -34,7 +34,7 @@ export const Question: React.FC = () => <QuestionWrapper {...questionWrapperProp
     <li><code>mySolution([])</code> should return <code>0</code></li>
   </ol>
 
-  <details>
+  <details className="hint">
     <summary><strong>Hint</strong></summary>
     Elements at even indexes are added. Elements at odd indexes are subtracted
   </details>

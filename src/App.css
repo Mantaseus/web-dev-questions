@@ -63,3 +63,7 @@
 table td.fit {
   width: 1px;
 }
+
+details.hint {
+  padding: 1rem 0;
+}
