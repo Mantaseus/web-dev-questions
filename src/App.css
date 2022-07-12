@@ -3,6 +3,7 @@
   display: flex;
   justify-content: center;
   padding: 1rem;
+  box-sizing: border-box;
 }
 
 .page-list > table {
@@ -13,6 +14,7 @@
 .page-list table td {
   padding: 0.5rem;
   vertical-align: top;
+  box-sizing: border-box;
 }
 .page-list table tr:hover {
   cursor: pointer;
@@ -22,9 +24,29 @@
   margin-bottom: 0.5rem;
 }
 
+.page {
+  display: flex;
+  justify-content: center;
+  padding: 1rem;
+  box-sizing: border-box;
+}
+.page > .question-container {
+  width: 50rem;
+}
+@media only screen and (max-width: 55rem) {
+  .page {
+    display: block;
+  }
+  .page > .question-container {
+    width: 100%;
+  }
+}
+
 .badge-list {
   display: flex;
   gap: 0.25rem;
+  flex-wrap: wrap;
+  align-items: flex-start;
 }
 .badge-list .badge {
   padding: 0.125rem 0.5rem;
@@ -37,10 +59,6 @@
 .ideal-solution-container,
 .instructions-container {
   padding: 1rem 0;
-}
-
-.ideal-solution-container pre {
-  overflow: auto;
 }
 
 .question-attempt-info {
