@@ -1,20 +1,39 @@
 import { useQuestionData } from "./hooks";
+import ts from 'typescript';
+import { useMemo } from "react";
 
 export interface Props {
   tsTypeStr: string;
   questionData: ReturnType<typeof useQuestionData>;
 }
 
-export const Instructions: React.FC<Props> = ({ tsTypeStr, questionData }) => {
-  const reMatch = Array.from(tsTypeStr.matchAll(/\((?<argsStr>.*)\) *=> *(?<returns>.*)$/g))[0]
-  const { argsStr = '', returns = '' } = reMatch.groups || {};
+function nodeIsAliasDeclaration(node: ts.Node): node is ts.TypeAliasDeclaration {
+  return node.kind === ts.SyntaxKind.TypeAliasDeclaration;
+}
 
-  const args = argsStr.split(',')
-    .map(str => str.trim()
-      .split(':')
-      .map(subStr => subStr.trim())
-    )
-    .map(([name, type]) => ({ name, type }));
+function nodeIsFunctionDeclaration(node: ts.Node): node is ts.FunctionTypeNode {
+  return node.kind === ts.SyntaxKind.FunctionType;
+}
+
+export const Instructions: React.FC<Props> = ({ tsTypeStr, questionData }) => {
+  const { args, returns } = useMemo(() => {
+    const sourceFile = ts.createSourceFile('file.ts', `type a = ${tsTypeStr}`, ts.ScriptTarget.ES2015, true);
+
+    const aliasT = sourceFile.statements[0];
+    if (nodeIsAliasDeclaration(aliasT)) {
+      const funcT = aliasT.type;
+      if (nodeIsFunctionDeclaration(funcT)) {
+        const returns = funcT.type.getText();
+        const args = funcT.parameters.map((arg, i) => ({
+          name: arg.name.getText(),
+          type: arg.type?.getText() || 'unknown',
+        }));
+        return { args, returns }
+      }
+    }
+
+    return { args: [], returns: 'unknown' };
+  }, [tsTypeStr])
 
   const code = `
 /**
