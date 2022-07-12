@@ -21,8 +21,9 @@ import * as js20 from './js20';
 import * as js21 from './js21';
 import * as js22 from './js22';
 import * as js23 from './js23';
+import * as js24 from './js24';
 
 export const QUESTIONS = {
   js1, js2, js3, js4, js5, js6, js7, js8, js9, js10, js11, js12, js13, js14, js15, js16, js17, js18,
-  js19, js20, js21, js22, js23
+  js19, js20, js21, js22, js23, js24
 };
