@@ -19,7 +19,7 @@ export const UserLastAttemptCode: React.FC<Props> = ({ questionData }) => {
         Result from this code: {questionData.lastAttemptResult}
       </div>
       <pre>
-        {beautify.js(questionData.lastAttemptCode, jsBeautifyOptions)}
+        {beautify.js(`test(${questionData.lastAttemptCode})`, jsBeautifyOptions)}
       </pre>
     </details>
   </div>);

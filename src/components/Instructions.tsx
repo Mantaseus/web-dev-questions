@@ -40,10 +40,9 @@ export const Instructions: React.FC<Props> = ({ tsTypeStr, questionData }) => {
 ${args.map(arg => ` * @param ${arg.name} - ${arg.type}`).join('\n')}
  * @returns ${returns}
  **/
-function mySolution(${args.map(arg => arg.name).join(', ')}) {
+test(function mySolution(${args.map(arg => arg.name).join(', ')}) {
 
-}
-test(mySolution)
+})
   `.trim();
 
   return (<div className="instructions-container">

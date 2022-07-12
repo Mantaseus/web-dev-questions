@@ -10,7 +10,7 @@ export const IdealSolution: React.FC<Props> = ({ func }) =>
     <details>
       <summary><strong>Ideal Solution</strong></summary>
       <pre>
-        {beautify.js(func.toString(), jsBeautifyOptions)}
+        {beautify.js(`test(${func.toString()})`, jsBeautifyOptions)}
       </pre>
     </details>
   </div>);
