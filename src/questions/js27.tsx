@@ -59,16 +59,4 @@ export const Question: React.FC = () => <QuestionWrapper {...questionWrapperProp
     </li>
     <li><code>mySolution([])</code> should return <code>[]</code></li>
   </ol>
-
-  <details className="hint">
-    <summary><strong>Hint</strong></summary>
-    <p>
-      The starting position of the slice should be <code>0</code> if <code>(i - (maxLength - 1)) &lt; 0</code> (where <code>i</code>
-      is the index of the array within the returned array). Otherwise it should be <code>(i - (maxLength - 1))</code>.
-    </p>
-    <p>
-      The ending position of the slice is <code>i + 1</code> (where <code>i</code> is the index of the
-      array within the returned array).
-    </p>
-  </details>
 </QuestionWrapper>;
