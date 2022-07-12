@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom";
 import { QuestionWrapper, Props as QuestionWrapperProps } from "../components/QuestionWrapper";
 
-export const title = 'Count of characters in string (as array of objects)';
-export const badges = ['JS', 'String.split', 'Array.reduce', 'Object', 'Object.keys', 'Array.map'];
+export const title = 'Characters that appear most frequently in a string';
+export const badges = ['JS', 'String.split', 'Array.reduce', 'Object', 'Object.keys', 'Array.map', 'Array.sort'];
 
 const questionWrapperProps: QuestionWrapperProps<
   (str: string) => { char: string, count: number }[]
@@ -25,20 +25,25 @@ const questionWrapperProps: QuestionWrapperProps<
         return obj;
       }, {} as Record<string, number>);
 
-    return Object.keys(countByChar).map(char => {
-      return {
-        char,
-        count: countByChar[char],
-      }
-    })
+    return Object.keys(countByChar)
+      .map(char => {
+        return {
+          char,
+          count: countByChar[char],
+        }
+      })
+      .sort((a, b) => b.count - a.count);
   }
 }
 
 export const Question: React.FC = () => <QuestionWrapper {...questionWrapperProps}>
-  <p>This question builds on top of <Link to="/js28">js28</Link></p>
+  <p>This question builds on top of <Link to="/js29">js29</Link>. Use your code from that question as your starting point.</p>
   <p>
-    Write a function that takes a string and returns an array of objects. Each object in the array will have the following
-    keys and value types
+    This question assumes that your function can already take a string and create an array of objects with <code>char</code> and
+    <code>count</code> keys in each object.
+  </p>
+  <p>
+    Your function should now sort your array of objects by the <code>count</code> value in a desceding order.
   </p>
   <pre>{`
 {
@@ -57,10 +62,10 @@ export const Question: React.FC = () => <QuestionWrapper {...questionWrapperProp
       <code>mySolution('abbcccdddd')</code> should return
       <pre>{`
 [
-  { char: 'a', count: 1 },
-  { char: 'b', count: 2 },
-  { char: 'c', count: 3 },
   { char: 'd', count: 4 },
+  { char: 'c', count: 3 },
+  { char: 'b', count: 2 },
+  { char: 'a', count: 1 },
 ]
       `.trim()}</pre>
     </li>
