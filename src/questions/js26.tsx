@@ -17,11 +17,9 @@ const questionWrapperProps: QuestionWrapperProps<
     [[], 5],
   ],
   idealSolution: function mySolution(numArr, maxLength) {
-    const indexOffset = maxLength - 1;
-
     return numArr.map((num, i, arr) => {
-      const startIndex = Math.max(0, i - indexOffset);
       const endIndex = i + 1;
+      const startIndex = Math.max(0, endIndex - maxLength);
       return arr.slice(startIndex, endIndex);
     });
   }
