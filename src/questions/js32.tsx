@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import { QuestionWrapper, Props as QuestionWrapperProps } from "../components/QuestionWrapper";
 
 export const title = 'Join 2 arrays into an array of objects';
