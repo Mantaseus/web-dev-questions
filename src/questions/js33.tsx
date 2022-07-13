@@ -1,7 +1,7 @@
 import { QuestionWrapper, Props as QuestionWrapperProps } from "../components/QuestionWrapper";
 
 export const title = 'Get value from arr2 based on index of element in arr1';
-export const badges = ['JS', 'Array.indexOf', 'Object'];
+export const badges = ['JS', 'Array.indexOf'];
 
 const questionWrapperProps: QuestionWrapperProps<
   (idArray: number[], nameArray: string[], idToFindNameFor: number) => string

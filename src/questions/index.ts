@@ -31,8 +31,9 @@ import * as js30 from './js30';
 import * as js31 from './js31';
 import * as js32 from './js32';
 import * as js33 from './js33';
+import * as js34 from './js34';
 
 export const QUESTIONS = {
   js1, js2, js3, js4, js5, js6, js7, js8, js9, js10, js11, js12, js13, js14, js15, js16, js17, js18,
-  js19, js20, js21, js22, js23, js24, js25, js26, js27, js28, js29, js30, js31, js32, js33
+  js19, js20, js21, js22, js23, js24, js25, js26, js27, js28, js29, js30, js31, js32, js33, js34
 };
