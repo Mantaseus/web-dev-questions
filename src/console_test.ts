@@ -1,5 +1,5 @@
 import equal from 'deep-equal';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 import { useQuestionKey } from './components/hooks';
 
@@ -33,9 +33,12 @@ export function getQuestionData(questionKey: string) {
 }
 
 export function useSetupTestFunction<F extends AnyFunc>(questionKey: string, testArgs: Parameters<F>[], idealSolution: F) {
+  const [questionData, setQuestionData] = useState(() => getQuestionData(questionKey));
+
   useEffect(() => {
     (window as any).test = async (func: F) => {
       console.clear();
+      console.log(`Testing: ${questionKey}`)
 
       let succeeded = true;
       let attemptResult: AttemptResult = 'success';
@@ -77,7 +80,7 @@ export function useSetupTestFunction<F extends AnyFunc>(questionKey: string, tes
 
       const prevQuestionData = getQuestionData(questionKey);
       const now = new Date().toISOString();
-      storeQuestionData(questionKey, {
+      setQuestionData({
         isCompleted: prevQuestionData?.isCompleted || succeeded,
         completedTime: prevQuestionData?.completedTime
           ? prevQuestionData.completedTime
@@ -87,7 +90,24 @@ export function useSetupTestFunction<F extends AnyFunc>(questionKey: string, tes
         lastAttemptCode: func.toString(),
         lastAttemptResult: attemptResult,
         lastAttemptTime: now,
-      })
+      });
     }
+    console.log(`${questionKey}: test() method available for use in the console`);
+
+    return () => {
+      console.log(`${questionKey}: test() method removed`);
+      delete (window as any).test;
+    };
   }, [questionKey])
+
+  useEffect(() => {
+    if (questionData) {
+      storeQuestionData(questionKey, questionData);
+    }
+  }, [questionData])
+
+  return {
+    ...questionData,
+    key: questionKey
+  };
 };

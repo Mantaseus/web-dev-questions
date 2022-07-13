@@ -1,6 +1,6 @@
 import { AnyFunc, useSetupTestFunction } from "../console_test";
 import { Badges } from "./Badges";
-import { useQuestionData } from "./hooks";
+import { useQuestionData, useQuestionKey } from "./hooks";
 import { IdealSolution } from "./IdealSolution";
 import { Instructions } from "./Instructions";
 import { UserLastAttemptCode } from "./UserLastAttemptCode";
@@ -16,12 +16,12 @@ export interface Props<F extends AnyFunc, P = Parameters<F>> {
 export const QuestionWrapper = <F extends AnyFunc>({
   testArgs, idealSolution, title, funcTsTypeStr, badges, children
 }: React.PropsWithChildren<Props<F>>): React.ReactElement => {
-  const questionData = useQuestionData();
-  useSetupTestFunction(questionData.key, testArgs, idealSolution);
+  const questionKey = useQuestionKey();
+  const questionData = useSetupTestFunction(questionKey, testArgs, idealSolution);
 
   return <div className="page">
     <div className="question-container">
-      <h2>{questionData.key}. {title}</h2>
+      <h2>{questionKey}. {title}</h2>
       <Badges questionData={questionData} badges={badges}/>
 
       <div className="text-muted-sm" style={{ marginTop: '0.5rem' }}>
