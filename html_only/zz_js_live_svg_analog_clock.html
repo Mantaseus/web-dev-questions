@@ -6,6 +6,23 @@
     <link rel="icon" href="./favicon.ico" type="image/x-icon">
     <title>q39</title>
 
+    <style>
+      body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        width: 100%;
+        height: 100vh;
+
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+
+      svg.clock {
+        width: 15em;
+      }
+    </style>
+
     <script>
       const MID_POINT = { x: 50, y: 50 };
       const SECOND_HAND_LEN = 40;
@@ -35,7 +52,7 @@
   </head>
 
   <body>
-    <svg width="100" height="100">
+    <svg class="clock" viewBox="0 0 100 100">
       <circle cx="50" cy="50" r="40" stroke="black" stroke-width="4" fill="white"/>
       <line id="minute" x1="50" y1="50" x2="50" y2="50" stroke="black" stroke-width="4"/>
       <line id="hour" x1="50" y1="50" x2="50" y2="50" stroke="black" stroke-width="4"/>
