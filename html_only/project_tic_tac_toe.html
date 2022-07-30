@@ -104,7 +104,7 @@
 
       function handleBoxClick(row, boxIndex) {
         const existingBoxText = boxText[row][boxIndex];
-        if (existingBoxText) {
+        if (existingBoxText || winner) {
           return;
         }
 
