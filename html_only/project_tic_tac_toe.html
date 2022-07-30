@@ -39,6 +39,10 @@
         margin-bottom: 2rem;
       }
 
+      #current-char {
+        margin-bottom: 1em;
+      }
+
       #btn-restart {
         margin-top: 2rem;
       }
@@ -47,6 +51,7 @@
 
   <body>
     <div id="winner"></div>
+    <div id="current-char"></div>
 
     <table>
       <tbody>
@@ -94,6 +99,8 @@
           const boxId = `#box${rowIndex}${boxIndex}`;
           document.querySelector(boxId).innerText = text
         }));
+
+        document.querySelector('#current-char').innerText = `Current player: ${currentChar}`;
 
         if (winner) {
           document.querySelector('#winner').innerText = `THE WINNER IS: ${winner}`;
