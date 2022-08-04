@@ -18,8 +18,9 @@
         justify-content: center;
       }
 
-      .message {
+      #message {
         margin-bottom: 16px;
+        font-size: x-large;
       }
 
       .cell-container {
@@ -67,6 +68,8 @@
     </div>
 
     <script>
+      let isPlaying = false;
+
       function sleep(timeToSleep) {
         return new Promise(res => setTimeout(res, timeToSleep));
       }
@@ -79,16 +82,24 @@
         document.querySelector(`#cell${cellNum}`).classList.remove('highlight');
       }
 
-      (async () => {
-        const order = [1,2,3,4,5];
-        while(true) {
-          for (let cellNum of order) {
-            highlightCell(cellNum);
-            await sleep(1000);
-            unhighlightCell(cellNum);
-          }
+      document.querySelector('#play-button').onclick =  async () => {
+        if (isPlaying) {
+          return;
         }
-      })();
+        isPlaying = true;
+        document.querySelector('#message').innerText = 'Watch';
+
+        const sequence = [1, 2, 3, 4, 5].sort(() => Math.round((Math.random() * 3)) - 1);
+        console.log(sequence)
+        for (let cellNum of sequence) {
+          highlightCell(cellNum);
+          await sleep(500);
+          unhighlightCell(cellNum);
+        }
+
+        document.querySelector('#message').innerText = 'Now you do it';
+        isPlaying = false;
+      };
     </script>
   </body>
 </html>
