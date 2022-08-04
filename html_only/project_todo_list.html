@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="./favicon.ico" type="image/x-icon">
+    <title>q39</title>
+
+    <style>
+      body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      }
+
+      .page-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .page-content {
+        width: 500px;
+      }
+
+      .input-container {
+        width: 100%;
+        display: flex;
+        gap: 8px;
+      }
+
+      .input-container input {
+        flex: 1;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="page-container">
+      <div class="page-content">
+        <div class="input-container">
+          <input id="task-input" placeholder="Add the text for your task here"/>
+          <button id="add-task">Add Task</button>
+        </div>
+
+        <h4>Tasks</h4>
+        <ul id="task-list"></ul>
+      </div>
+    </div>
+
+    <script>
+      const inputElement = document.querySelector('#task-input');
+      const listElement = document.querySelector('#task-list');
+
+      let tasksList = [];
+      let finishedTasksList = [];
+
+      function updateUI() {
+        listElement.innerHTML = '';
+        tasksList.forEach((task, i) => {
+          const taskText = document.createElement('span');
+          const listItem = document.createElement('li');
+          const button = document.createElement('button');
+
+          taskText.innerText = task;
+          taskText.style.marginRight = '8px';
+
+          button.innerText = 'Done';
+          button.onclick = () => {
+            tasksList = tasksList.filter((a, taskIndex) => taskIndex !== i);
+            updateUI();
+          }
+
+          listItem.appendChild(taskText);
+          listItem.appendChild(button);
+
+          listElement.appendChild(listItem);
+        });
+      }
+
+      document.querySelector('#add-task').onclick = () => {
+        const task = inputElement.value;
+        if (task) {
+          tasksList.push(task);
+        }
+        inputElement.value = '';
+
+        updateUI();
+      }
+    </script>
+  </body>
+</html>
