@@ -68,38 +68,72 @@
     </div>
 
     <script>
+      const cellNums = [1,2,3,4,5];
+
       let isPlaying = false;
+      let isBlinking = false;
+      let sequence = [];
+      let sequenceCheckIndex = 0;
 
       function sleep(timeToSleep) {
         return new Promise(res => setTimeout(res, timeToSleep));
       }
 
-      function highlightCell(cellNum) {
-        document.querySelector(`#cell${cellNum}`).classList.add('highlight');
+      function highlightCell(cellNum, cssClass = 'highlight') {
+        document.querySelector(`#cell${cellNum}`).classList.add(cssClass);
       }
 
-      function unhighlightCell(cellNum) {
-        document.querySelector(`#cell${cellNum}`).classList.remove('highlight');
+      function unhighlightCell(cellNum, cssClass = 'highlight') {
+        document.querySelector(`#cell${cellNum}`).classList.remove(cssClass);
       }
 
       document.querySelector('#play-button').onclick =  async () => {
-        if (isPlaying) {
+        if (isBlinking) {
           return;
         }
-        isPlaying = true;
-        document.querySelector('#message').innerText = 'Watch';
 
-        const sequence = [1, 2, 3, 4, 5].sort(() => Math.round((Math.random() * 3)) - 1);
+        isPlaying = true;
+        sequence = [];
+        sequenceCheckIndex = 0;
+
+        isBlinking = true;
+        document.querySelector('#message').innerText = 'Watch';
+        cellNums.forEach(cellNum => document.querySelector(`#cell${cellNum}`).className = 'cell');
+
+        sequence = [...cellNums].sort(() => Math.round((Math.random() * 3)) - 1);
         console.log(sequence)
         for (let cellNum of sequence) {
-          highlightCell(cellNum);
+          highlightCell(cellNum, 'highlight');
           await sleep(500);
-          unhighlightCell(cellNum);
+          unhighlightCell(cellNum, 'highlight');
         }
 
+        isBlinking = false;
         document.querySelector('#message').innerText = 'Now you do it';
-        isPlaying = false;
       };
+
+      cellNums.forEach(cellNum => {
+        const cell = document.querySelector(`#cell${cellNum}`);
+        cell.onclick = () => {
+          if (isBlinking || !isPlaying) {
+            return;
+          }
+
+          if (sequence[sequenceCheckIndex] === cellNum) {
+            highlightCell(cellNum, 'correct');
+            sequenceCheckIndex++;
+
+            if (sequenceCheckIndex >= sequence.length) {
+              isPlaying = false;
+              document.querySelector('#message').innerText = 'You win :D';
+            }
+          } else {
+            highlightCell(cellNum, 'wrong');
+            isPlaying = false;
+            document.querySelector('#message').innerText = 'Incorrect :(';
+          }
+        }
+      })
     </script>
   </body>
 </html>
