@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="./favicon.ico" type="image/x-icon">
+    <title>q39</title>
+
+    <style>
+      body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      }
+
+      .page-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .card-container {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        flex-wrap: wrap;
+
+        width: 600px;
+        gap: 8px;
+      }
+
+      .card {
+        width: 64px;
+        height: 80px;
+        border: 1px solid black;
+        border-radius: 8px;
+
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+
+        cursor: pointer;
+      }
+      .card.red {
+        color: red;
+      }
+      .card.black {
+        color: black;
+      }
+      .card.matched {
+        border-color: dodgerblue;
+        background-color: rgba(30, 143, 255, 0.2);
+      }
+      .card.hidden {
+        background-color: dodgerblue;
+        border-color: dodgerblue;
+      }
+      .card.hidden div {
+        display: none;
+      }
+
+      #restart-button {
+        margin-bottom: 16px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="page-container">
+      <button id="restart-button">Restart</button>
+      <h2><span id="matched-card-count">0</span>/52 cards matched</h2>
+      <div class="card-container">
+      </div>
+    </div>
+
+    <script>
+      const cards = [
+        { type: '♠', typeName: 'spades', color: 'black', num: '2' },
+        { type: '♠', typeName: 'spades', color: 'black', num: '3' },
+        { type: '♠', typeName: 'spades', color: 'black', num: '4' },
+        { type: '♠', typeName: 'spades', color: 'black', num: '5' },
+        { type: '♠', typeName: 'spades', color: 'black', num: '6' },
+        { type: '♠', typeName: 'spades', color: 'black', num: '7' },
+        { type: '♠', typeName: 'spades', color: 'black', num: '8' },
+        { type: '♠', typeName: 'spades', color: 'black', num: '9' },
+        { type: '♠', typeName: 'spades', color: 'black', num: '10' },
+        { type: '♠', typeName: 'spades', color: 'black', num: 'J' },
+        { type: '♠', typeName: 'spades', color: 'black', num: 'Q' },
+        { type: '♠', typeName: 'spades', color: 'black', num: 'K' },
+        { type: '♠', typeName: 'spades', color: 'black', num: 'A' },
+
+        { type: '♣', typeName: 'club', color: 'black', num: '2' },
+        { type: '♣', typeName: 'club', color: 'black', num: '3' },
+        { type: '♣', typeName: 'club', color: 'black', num: '4' },
+        { type: '♣', typeName: 'club', color: 'black', num: '5' },
+        { type: '♣', typeName: 'club', color: 'black', num: '6' },
+        { type: '♣', typeName: 'club', color: 'black', num: '7' },
+        { type: '♣', typeName: 'club', color: 'black', num: '8' },
+        { type: '♣', typeName: 'club', color: 'black', num: '9' },
+        { type: '♣', typeName: 'club', color: 'black', num: '10' },
+        { type: '♣', typeName: 'club', color: 'black', num: 'J' },
+        { type: '♣', typeName: 'club', color: 'black', num: 'Q' },
+        { type: '♣', typeName: 'club', color: 'black', num: 'K' },
+        { type: '♣', typeName: 'club', color: 'black', num: 'A' },
+
+        { type: '♥', typeName: 'hearts', color: 'red', num: '2' },
+        { type: '♥', typeName: 'hearts', color: 'red', num: '3' },
+        { type: '♥', typeName: 'hearts', color: 'red', num: '4' },
+        { type: '♥', typeName: 'hearts', color: 'red', num: '5' },
+        { type: '♥', typeName: 'hearts', color: 'red', num: '6' },
+        { type: '♥', typeName: 'hearts', color: 'red', num: '7' },
+        { type: '♥', typeName: 'hearts', color: 'red', num: '8' },
+        { type: '♥', typeName: 'hearts', color: 'red', num: '9' },
+        { type: '♥', typeName: 'hearts', color: 'red', num: '10' },
+        { type: '♥', typeName: 'hearts', color: 'red', num: 'J' },
+        { type: '♥', typeName: 'hearts', color: 'red', num: 'Q' },
+        { type: '♥', typeName: 'hearts', color: 'red', num: 'K' },
+        { type: '♥', typeName: 'hearts', color: 'red', num: 'A' },
+
+        { type: '♦', typeName: 'diamond', color: 'red', num: '2' },
+        { type: '♦', typeName: 'diamond', color: 'red', num: '3' },
+        { type: '♦', typeName: 'diamond', color: 'red', num: '4' },
+        { type: '♦', typeName: 'diamond', color: 'red', num: '5' },
+        { type: '♦', typeName: 'diamond', color: 'red', num: '6' },
+        { type: '♦', typeName: 'diamond', color: 'red', num: '7' },
+        { type: '♦', typeName: 'diamond', color: 'red', num: '8' },
+        { type: '♦', typeName: 'diamond', color: 'red', num: '9' },
+        { type: '♦', typeName: 'diamond', color: 'red', num: '10' },
+        { type: '♦', typeName: 'diamond', color: 'red', num: 'J' },
+        { type: '♦', typeName: 'diamond', color: 'red', num: 'Q' },
+        { type: '♦', typeName: 'diamond', color: 'red', num: 'K' },
+        { type: '♦', typeName: 'diamond', color: 'red', num: 'A' },
+      ];
+
+      function restart() {
+        const randomizedCards = [...cards].sort(() => Math.round(Math.random() * 3) - 1)
+        let matchedCardCount = 0;
+        const visibleUnmatchedCards = [];
+
+        const cardContainer = document.querySelector('.card-container')
+        cardContainer.innerHTML = '';
+
+        document.querySelector('#matched-card-count').innerText = matchedCardCount;
+
+        for (let card of randomizedCards) {
+          const cardElement = document.createElement('div');
+          const cardNumElement = document.createElement('div');
+          const cardTypeElement = document.createElement('div');
+
+          cardElement.classList.add('card');
+          cardElement.classList.add('hidden');
+          cardElement.classList.add(`card-${card.num}`);
+          cardElement.classList.add(card.typeName);
+          cardElement.classList.add(card.color);
+
+          cardNumElement.innerText = card.num;
+          cardTypeElement.innerText = card.type;
+
+          cardElement.appendChild(cardNumElement);
+          cardElement.appendChild(cardTypeElement);
+          cardContainer.appendChild(cardElement);
+
+          cardElement.onclick = () => {
+            if (cardElement.className.includes('visible')) {
+              return;
+            }
+
+            cardElement.classList.remove('hidden');
+            cardElement.classList.add('visible');
+
+            if (visibleUnmatchedCards.length === 2) {
+              const cardElementToHide = visibleUnmatchedCards.shift();
+              cardElementToHide.classList.remove('visible');
+              cardElementToHide.classList.add('hidden');
+            }
+
+            if (visibleUnmatchedCards.length === 1) {
+              if (visibleUnmatchedCards[0].className.includes(card.color) && visibleUnmatchedCards[0].className.includes(`card-${card.num}`)) {
+                // Its a match. The color and the number match
+                const matchedCardElement = visibleUnmatchedCards.shift();
+
+                matchedCardElement.classList.add('matched')
+                cardElement.classList.add('matched');
+
+                matchedCardCount += 2;
+                document.querySelector('#matched-card-count').innerText = matchedCardCount;
+              } else {
+                visibleUnmatchedCards.push(cardElement);
+              }
+            } else {
+              visibleUnmatchedCards.push(cardElement);
+            }
+          }
+        }
+      }
+
+      document.querySelector('#restart-button').onclick = restart;
+      restart();
+    </script>
+  </body>
+</html>
