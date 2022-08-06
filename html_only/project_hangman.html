@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="./favicon.ico" type="image/x-icon">
+    <title>q39</title>
+
+    <style>
+      body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      }
+
+      .page-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+      }
+
+      #char-container {
+        display: flex;
+        gap: 8px;
+      }
+      #char-container div {
+        width: 64px;
+        height: 64px;
+        border-bottom: 1px solid black;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: x-large;
+      }
+
+      #attempt-container {
+        display: flex;
+        gap: 8px;
+        margin-top: 16px;
+      }
+      #attempt-container div {
+        width: 16px;
+        height: 16px;
+        border-radius: 16px;
+        background-color: #ccc;
+      }
+      #attempt-container div.attempted {
+        background-color: red;
+      }
+
+      #status-message {
+        margin-top: 16px;
+        font-size: x-large;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="page-container">
+      <button id="play-button">PLAY</button>
+      <div id="char-container"></div>
+      <div id="attempt-container"></div>
+      <div id="status-message"></div>
+    </div>
+
+    <script>
+      const maxAttempts = 10;
+
+      const charContainer = document.querySelector('#char-container');
+      const attemptContainer = document.querySelector('#attempt-container');
+
+      const attemptElements = Array(maxAttempts).fill(0).map((val, i) => {
+        const attemptElement = document.createElement('div');
+        attemptContainer.appendChild(attemptElement);
+        return attemptElement;
+      });
+
+      let charElementByChar = {};
+      let attemptCount = 0;
+      let isPlaying = false;
+      let charsRemaining = '';
+
+      function updateUI() {
+        attemptElements.forEach((element, i) => {
+          if (i < attemptCount) {
+            element.classList.add('attempted');
+          }
+        });
+      }
+
+      document.querySelector('#play-button').onclick = async () => {
+        isPlaying = true;
+        attemptCount = 0;
+
+        attemptElements.forEach(element => element.classList.remove('attempted'));
+        document.querySelector('#status-message').innerText = '';
+
+        const word = await fetch('https://puzzle.mead.io/puzzle?wordCount=1')
+          .then(res => res.json())
+          .then(res => res.puzzle.toUpperCase());
+        console.log(word);
+
+        charContainer.innerHTML = '';
+        word.split('')
+          .forEach((char, i) => {
+            const charElement = document.createElement('div');
+            charContainer.appendChild(charElement);
+
+            charElementByChar[char] = charElementByChar[char] || [];
+            charElementByChar[char].push(charElement);
+          });
+        charsRemaining = Array.from(new Set(word.split(''))).join('');
+      }
+
+      document.addEventListener('keypress', e => {
+        if (!isPlaying) {
+          return;
+        }
+
+        const attemptChar = e.key.toUpperCase();
+        if (charElementByChar[attemptChar]) {
+          charElementByChar[attemptChar].forEach(element => element.innerText = attemptChar);
+          charsRemaining = charsRemaining.replace(attemptChar, '');
+          if (!charsRemaining) {
+            document.querySelector('#status-message').innerText = 'You win :D';
+            isPlaying = false;
+          }
+        } else {
+          attemptCount++;
+          if (attemptCount >= maxAttempts) {
+            document.querySelector('#status-message').innerText = 'You lost :(';
+            isPlaying = false;
+          }
+        }
+        updateUI()
+      });
+    </script>
+  </body>
+</html>
