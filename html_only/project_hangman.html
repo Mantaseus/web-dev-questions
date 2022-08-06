@@ -21,6 +21,7 @@
       #char-container {
         display: flex;
         gap: 8px;
+        margin-top: 16px;
       }
       #char-container div {
         width: 64px;
@@ -35,7 +36,7 @@
       #attempt-container {
         display: flex;
         gap: 8px;
-        margin-top: 16px;
+        margin-top: 32px;
       }
       #attempt-container div {
         width: 16px;
@@ -48,7 +49,7 @@
       }
 
       #status-message {
-        margin-top: 16px;
+        margin-top: 32px;
         font-size: x-large;
       }
     </style>
@@ -57,13 +58,13 @@
   <body>
     <div class="page-container">
       <button id="play-button">PLAY</button>
-      <div id="char-container"></div>
       <div id="attempt-container"></div>
+      <div id="char-container"></div>
       <div id="status-message"></div>
     </div>
 
     <script>
-      const maxAttempts = 10;
+      const maxAttempts = 16;
 
       const charContainer = document.querySelector('#char-container');
       const attemptContainer = document.querySelector('#attempt-container');
@@ -77,6 +78,7 @@
       let charElementByChar = {};
       let attemptCount = 0;
       let isPlaying = false;
+      let word = '';
       let charsRemaining = '';
 
       function updateUI() {
@@ -90,11 +92,12 @@
       document.querySelector('#play-button').onclick = async () => {
         isPlaying = true;
         attemptCount = 0;
+        charElementByChar = {};
 
         attemptElements.forEach(element => element.classList.remove('attempted'));
         document.querySelector('#status-message').innerText = '';
 
-        const word = await fetch('https://puzzle.mead.io/puzzle?wordCount=1')
+        word = await fetch('https://puzzle.mead.io/puzzle?wordCount=1')
           .then(res => res.json())
           .then(res => res.puzzle.toUpperCase());
         console.log(word);
@@ -127,7 +130,7 @@
         } else {
           attemptCount++;
           if (attemptCount >= maxAttempts) {
-            document.querySelector('#status-message').innerText = 'You lost :(';
+            document.querySelector('#status-message').innerText = `You lost. It was "${word}" :(`;
             isPlaying = false;
           }
         }
