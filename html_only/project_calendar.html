@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="./favicon.ico" type="image/x-icon">
+    <title>q39</title>
+
+    <style>
+      body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      }
+
+      .page-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .controls {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-bottom: 16px;
+      }
+
+      #current-month {
+        flex: 1;
+        margin-left: 8px
+      }
+
+      .week-container {
+        display: flex;
+      }
+      .week-container div {
+        width: 40px;
+        height: 40px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .week-container div.not-this-month {
+        color: #ccc;
+      }
+      .week-container div.today {
+        border-radius: 100px;
+        background-color: dodgerblue;
+        color: white;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="page-container">
+      <div class="calendar-container">
+        <div class="controls">
+          <button id="show-prev-month">&lt;</button>
+          <button id="show-now-month">Today</button>
+          <button id="show-next-month">&gt;</button>
+          <div id="current-month"></div>
+        </div>
+        <div id="month-container">
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const now = new Date();
+      let monthDelta = 0;
+
+      function updateUI() {
+        const monthContainerElement = document.querySelector('#month-container');
+        monthContainerElement.innerHTML = '';
+
+        const thisMonthDate = new Date(now);
+        thisMonthDate.setMonth(thisMonthDate.getMonth() + monthDelta);
+
+        document.querySelector('#current-month').innerText = thisMonthDate.toLocaleString('default', { month: 'long', year: 'numeric' });
+
+        const startDate = new Date(thisMonthDate);
+        startDate.setDate(1); // Set to first of the month
+        startDate.setDate(startDate.getDate() - startDate.getDay()); // Set to the first day of that week
+
+        for (let weekIndex = 0; weekIndex < 10; weekIndex++) {
+          const weekStart = new Date(startDate);
+          weekStart.setDate(weekStart.getDate() + (7 * weekIndex));
+
+          if (weekIndex !== 0 && weekStart.getMonth() !== thisMonthDate.getMonth()) {
+            break;
+          }
+
+          const weekContainer = document.createElement('div');
+          weekContainer.classList.add('week-container');
+
+          for (let dayIndex = 0; dayIndex < 7; dayIndex++) {
+            const day = new Date(weekStart);
+            day.setDate(day.getDate() + dayIndex);
+
+            const dayElement = document.createElement('div');
+            dayElement.innerText = day.toLocaleString('default', { day: "numeric" });
+            
+            if (day.getMonth() !== thisMonthDate.getMonth()) {
+              dayElement.classList.add('not-this-month')
+            }
+
+            const dayStr = day.toLocaleString('default', { day: 'numeric', month: 'numeric', year: 'numeric'})
+            const todayStr = now.toLocaleString('default', { day: 'numeric', month: 'numeric', year: 'numeric'});
+            if (dayStr === todayStr) {
+              dayElement.classList.add('today');
+            }
+
+            weekContainer.appendChild(dayElement);
+          }
+
+          monthContainerElement.appendChild(weekContainer);
+        }
+      }
+
+      document.querySelector('#show-prev-month').onclick = () => {
+        monthDelta--;
+        updateUI();
+      };
+
+      document.querySelector('#show-next-month').onclick = () => {
+        monthDelta++;
+        updateUI();
+      }
+
+      document.querySelector('#show-now-month').onclick = () => {
+        monthDelta = 0;
+        updateUI();
+      }
+
+      updateUI();
+    </script>
+  </body>
+</html>
