@@ -37,15 +37,24 @@
         display: flex;
         gap: 8px;
         margin-top: 32px;
+        align-items: center;
       }
       #attempt-container div {
         width: 16px;
         height: 16px;
+        margin: 8px 8px;
         border-radius: 16px;
         background-color: #ccc;
       }
       #attempt-container div.attempted {
+        width: 32px;
+        height: 32px;
         background-color: red;
+        color: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 0;
       }
 
       #status-message {
@@ -76,25 +85,30 @@
       });
 
       let charElementByChar = {};
-      let attemptCount = 0;
+      let attemptArray = [];
       let isPlaying = false;
       let word = '';
       let charsRemaining = '';
 
       function updateUI() {
         attemptElements.forEach((element, i) => {
-          if (i < attemptCount) {
+          if (i < attemptArray.length) {
             element.classList.add('attempted');
+            element.innerText = attemptArray[i];
           }
         });
       }
 
       document.querySelector('#play-button').onclick = async () => {
         isPlaying = true;
-        attemptCount = 0;
+        attemptArray = [];
         charElementByChar = {};
 
-        attemptElements.forEach(element => element.classList.remove('attempted'));
+
+        attemptElements.forEach(element => {
+          element.classList.remove('attempted');
+          element.innerText = '';
+        });
         document.querySelector('#status-message').innerText = '';
 
         word = await fetch('https://puzzle.mead.io/puzzle?wordCount=1')
@@ -128,8 +142,8 @@
             isPlaying = false;
           }
         } else {
-          attemptCount++;
-          if (attemptCount >= maxAttempts) {
+          attemptArray.push(attemptChar);
+          if (attemptArray.length >= maxAttempts) {
             document.querySelector('#status-message').innerText = `You lost. It was "${word}" :(`;
             isPlaying = false;
           }
