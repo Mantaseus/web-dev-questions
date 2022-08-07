@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="./favicon.ico" type="image/x-icon">
+    <title>q39</title>
+
+    <style>
+      body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      }
+
+      .page-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+      }
+
+      #game-container {
+        display: flex;
+        margin-top: 16px;
+      }
+      #game-container > div {
+        background-color: dodgerblue;
+        cursor: pointer;
+
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        padding: 8px;
+      }
+      #current-player,
+      #game-container > div > div {
+        width: 50px;
+        height: 50px;
+        border-radius: 100px;
+        background-color: white;
+      }
+
+      #current-player.red,
+      #game-container > div > div.red {
+        background-color: rgb(231, 39, 39);
+      }
+      #current-player.yellow,
+      #game-container > div > div.yellow {
+        background-color: rgb(255, 208, 0);
+      }
+
+      #restart-button {
+        margin-top: 16px;
+      }
+
+      #status-message {
+        font-size: x-large;
+        margin-top: 16px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="page-container">
+      <div id="current-player"></div>
+      <div id="game-container"></div>
+      <div id="status-message"></div>
+      <button id="restart-button">Restart</button>
+    </div>
+
+    <script>
+      const columnCount = 7;
+      const rowCount = 6;
+      const matchNeededForWin = 4;
+
+      const currentPlayerElement = document.querySelector('#current-player');
+      const gameContainer = document.querySelector('#game-container');
+
+      let isGamePlaying = false;
+      let isRedPlaying = false;
+
+      function updateCurrentPlayerUI(isRedPlaying) {
+        if (isRedPlaying) {
+          currentPlayerElement.classList.remove('yellow');
+          currentPlayerElement.classList.add('red');
+        } else {
+          currentPlayerElement.classList.add('yellow');
+          currentPlayerElement.classList.remove('red');
+        }
+      }
+
+      function setup() {
+        const columns = [];
+
+        isRedPlaying = false;
+        isGamePlaying = true;
+        document.querySelector('#status-message').innerText = ''
+        gameContainer.innerHTML = '';
+
+        updateCurrentPlayerUI(isRedPlaying);
+
+        /**
+         * The count returned includes the starting element as well
+         **/
+        function countSameColorCellsInDirection(startX, startY, xDir, yDir) {
+          const startElement = columns[startX][startY];
+
+          let count = 0;
+          let x = startX + xDir;
+          let y = startY + yDir;
+          while (x >= 0 && y >= 0 && x < columnCount && y < rowCount) {
+            const element = columns[x][y];
+            if (element.className === startElement.className) {
+              count ++;
+            } else {
+              break;
+            }
+
+            x += xDir;
+            y += yDir;
+          }
+
+          return count;
+        }
+
+        for (let colIndex = 0; colIndex < columnCount; colIndex++) {
+          const columnElement = document.createElement('div');
+          const columnRows = [];
+
+          let nextFillIndex = 0;
+
+          for (let rowIndex = 0; rowIndex < rowCount; rowIndex++) {
+            const rowElement = document.createElement('div');
+
+            columnElement.appendChild(rowElement);
+            columnRows.push(rowElement);
+          }
+
+          // We want 0 index to be showed at the bottom in the UI
+          columnRows.reverse();
+
+          columnElement.onclick = () => {
+            if (!isGamePlaying || nextFillIndex >= rowCount) {
+              return;
+            }
+
+            columnRows[nextFillIndex].classList.add(isRedPlaying ? 'red' : 'yellow');
+
+            const matchCountVertical = 1 + countSameColorCellsInDirection(colIndex, nextFillIndex, 0, -1) +
+              countSameColorCellsInDirection(colIndex, nextFillIndex, 0, 1);
+            const matchCountHorizontal = 1 + countSameColorCellsInDirection(colIndex, nextFillIndex, -1, 0) +
+              countSameColorCellsInDirection(colIndex, nextFillIndex, 1, 0);
+            const matchCountDiagonal1 = 1 + countSameColorCellsInDirection(colIndex, nextFillIndex, -1, 1) +
+              countSameColorCellsInDirection(colIndex, nextFillIndex, 1, -1);
+            const matchCountDiagonal2 = 1 + countSameColorCellsInDirection(colIndex, nextFillIndex, 1, 1) +
+              countSameColorCellsInDirection(colIndex, nextFillIndex, -1, -1);
+
+            if (
+              matchCountVertical === matchNeededForWin ||
+              matchCountHorizontal === matchNeededForWin ||
+              matchCountDiagonal1 === matchNeededForWin ||
+              matchCountDiagonal2 === matchNeededForWin
+            ) {
+              isGamePlaying = false;
+              document.querySelector('#status-message').innerText = `${isRedPlaying ? 'RED' : 'YELLOW'} WINS!!!`;
+            }
+
+            nextFillIndex++;
+            isRedPlaying = !isRedPlaying;
+            updateCurrentPlayerUI(isRedPlaying);
+          }
+
+          columns.push(columnRows);
+          gameContainer.appendChild(columnElement);
+        }
+      }
+
+      document.querySelector('#restart-button').onclick = setup;
+      setup();
+    </script>
+  </body>
+</html>
