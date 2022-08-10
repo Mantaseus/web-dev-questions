@@ -1,6 +1,6 @@
 import { QuestionWrapper, Props as QuestionWrapperProps } from "../components/QuestionWrapper";
 
-export const title = 'Convert decimal number to binary';
+export const title = 'Convert decimal number to hexadecimal';
 export const badges = ['JS'];
 
 const questionWrapperProps: QuestionWrapperProps<
@@ -30,12 +30,13 @@ const questionWrapperProps: QuestionWrapperProps<
     [65540],
   ],
   idealSolution: function mySolution(num) {
-    let base = 2;
+    let hexChars = '0123456789ABCDEF';
+    let base = 16;
     let binary = '';
     let nextNum = num;
     while (nextNum > 0) {
       const remainder = nextNum % base;
-      binary = `${remainder}${binary}`;
+      binary = `${hexChars.charAt(remainder)}${binary}`;
       nextNum = Math.floor(nextNum / base);
     }
     return binary;
@@ -44,18 +45,26 @@ const questionWrapperProps: QuestionWrapperProps<
 
 export const Question: React.FC = () => <QuestionWrapper {...questionWrapperProps}>
   <p>
-    Write a function that will take a normal decimal number (<code>&gt; 0</code>) and returns the binary (base 2) form of that
+    Write a function that will take a normal decimal number (<code>&gt; 0</code>) and returns the hex (base 16) form of that
     number as a string.
   </p>
+
+  <p>
+    You may use the following variable in your function
+  </p>
+  <pre>{`
+let hexChars = '0123456789ABCDEF';
+  `.trim()}</pre>
 
   <h4>Examples</h4>
   <ol>
     <li><code>mySolution(1)</code> should return <code>'1'</code></li>
-    <li><code>mySolution(2)</code> should return <code>'10'</code></li>
-    <li><code>mySolution(3)</code> should return <code>'11'</code></li>
-    <li><code>mySolution(4)</code> should return <code>'100'</code></li>
-    <li><code>mySolution(5)</code> should return <code>'101'</code></li>
-    <li><code>mySolution(10)</code> should return <code>'1010'</code></li>
-    <li><code>mySolution(255)</code> should return <code>'11111111'</code></li>
+    <li><code>mySolution(2)</code> should return <code>'2'</code></li>
+    <li><code>mySolution(5)</code> should return <code>'5'</code></li>
+    <li><code>mySolution(10)</code> should return <code>'A'</code></li>
+    <li><code>mySolution(15)</code> should return <code>'F'</code></li>
+    <li><code>mySolution(16)</code> should return <code>'10'</code></li>
+    <li><code>mySolution(255)</code> should return <code>'FF'</code></li>
+    <li><code>mySolution(256)</code> should return <code>'100'</code></li>
   </ol>
 </QuestionWrapper>;
