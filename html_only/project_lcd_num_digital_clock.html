@@ -146,6 +146,17 @@
     </style>
 
     <script>
+      /*
+      setInterval(() => {
+        const now = new Date();
+        const hourStr = now.getHours().toString().padStart(2, '0');
+        const minuteStr = now.getMinutes().toString().padStart(2, '0');
+        const secondStr = now.getSeconds().toString().padStart(2, '0');
+
+        document.querySelector('#simple-time').innerText = `${hourStr} : ${minuteStr} : ${secondStr}`;
+      }, 1000);
+      */
+
       setInterval(() => {
         const now = new Date();
         const hourStr = now.getHours().toString().padStart(2, '0');
@@ -176,6 +187,10 @@
       <div class="lcd-num num-8"></div>
       <div class="lcd-num num-9"></div>
     </div>
+    -->
+
+    <!--
+    <div id="simple-time" style="padding: 16px;"></div>
     -->
 
     <div class="clock-container">
